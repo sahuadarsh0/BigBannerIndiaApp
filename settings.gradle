@@ -1,0 +1,3 @@
+rootProject.name='BigBanner India'
+include ':app'
+include ':asautils'

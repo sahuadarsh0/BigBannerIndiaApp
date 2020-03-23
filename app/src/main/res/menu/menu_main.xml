@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/accounts"
+        android:enabled="true"
+        android:icon="@drawable/ic_user"
+        android:title="Account"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/invisible"
+        android:enabled="true"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/shops"
+        android:enabled="true"
+        android:icon="@drawable/ic_shop"
+        android:title="Shops"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu"
+        android:icon="@drawable/ic_menu"
+        android:title="Menu"
+        app:showAsAction="always" />
+
+
+
+<!--    <item-->
+<!--        android:id="@+id/voting_panel"-->
+<!--        android:icon="@drawable/ic_menu_slideshow"-->
+<!--        android:title="Vote"-->
+<!--        android:visible="false" />-->
+
+</menu>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1060309650696",
+    "firebase_url": "https://bigbanner.firebaseio.com",
+    "project_id": "bigbanner",
+    "storage_bucket": "bigbanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060309650696:android:7122da819ddf880a06b0bd",
+        "android_client_info": {
+          "package_name": "minds.technited.bigbannerindia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060309650696-r1rekjg009pl3abgh1lj88a2kg8ehqes.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqp18p3SOJ0Kbvq0sHPswMSZA9Hquy4-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060309650696-r1rekjg009pl3abgh1lj88a2kg8ehqes.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
