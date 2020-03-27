@@ -142,7 +142,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                 if (!data.getMsg().equals("0.1.0")) {
 
-
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.dialog_update_app);
                     Button btn = dialog.findViewById(R.id.btn_ok);
@@ -160,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         @Override
                         public void onClick(View v) {
 
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.43.102/BB/Bigbanner.com/api/app"));
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FetchApi.base_url+"app"));
                             startActivity(browserIntent);
 
                         }

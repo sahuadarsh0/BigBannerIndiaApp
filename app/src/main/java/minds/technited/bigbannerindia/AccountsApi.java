@@ -22,8 +22,8 @@ import retrofit2.http.Path;
 
 class AccountsApi {
 
-//    private static final String base_url = "http://bigbannerindia.com/admin/api/";
-    private static final String base_url = "http://192.168.43.102/BB/Bigbanner.com/api/";
+    private static final String base_url = "http://bigbannerindia.com/admin/api/";
+//    private static final String base_url = "http://192.168.43.102/Bigbannerindia.com/admin/api/";
 
     private static ApiService apiService = null;
 
