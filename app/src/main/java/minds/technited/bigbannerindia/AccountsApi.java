@@ -20,7 +20,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-class FetchApi {
+class AccountsApi {
 
 //    private static final String base_url = "http://bigbannerindia.com/admin/api/";
     private static final String base_url = "http://192.168.43.102/BB/Bigbanner.com/api/";
@@ -52,8 +52,8 @@ class FetchApi {
 
     public interface ApiService {
 
-        @GET("version/")
-        Call<Received> checkVersion();
+        @GET("state/1")
+        Call<List<Masters>> getStates();
 
         @GET("district/{id}")
         Call<List<Masters>> getDistricts(@Path("id") String id);

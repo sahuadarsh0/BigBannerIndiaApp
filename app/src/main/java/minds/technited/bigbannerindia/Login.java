@@ -56,6 +56,8 @@ public class Login extends Fragment {
         etMobile = view.findViewById(R.id.mobile);
         etPassword = view.findViewById(R.id.password);
         TextView register_text = view.findViewById(R.id.register_text);
+        TextView register = view.findViewById(R.id.register);
+
         ConstraintLayout layout = view.findViewById(R.id.request_layout);
         Button btnLogin = view.findViewById(R.id.login);
         c = getActivity().getApplicationContext();
@@ -74,7 +76,14 @@ public class Login extends Fragment {
 
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_up);
         layout.startAnimation(animation);
+
         register_text.setOnClickListener(v -> {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new Register(context))
+                    .commit();
+        });
+        register.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new Register(context))
@@ -102,7 +111,7 @@ public class Login extends Fragment {
 
         if (flag) {
 
-            Call<Received> loginCustomerCall = FetchApi.getApiService().loginCustomer(mobile, password);
+            Call<Received> loginCustomerCall = AccountsApi.getApiService().loginCustomer(mobile, password);
 
             loginCustomerCall.enqueue(new Callback<Received>() {
                 @Override

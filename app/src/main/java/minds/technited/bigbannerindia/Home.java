@@ -21,10 +21,9 @@ public class Home extends Fragment {
     }
 
 
-    public Home(Context context){
-        this.context=context;
+    public Home(Context context) {
+        this.context = context;
     }
-
 
 
     @Override

@@ -93,6 +93,7 @@ public class Register extends Fragment {
 
         });
 
+
         // Get Spinners
         {
             getStateList();
@@ -172,7 +173,7 @@ public class Register extends Fragment {
     private void getStateList() {
 
 
-        Call<List<Masters>> getState = FetchApi.getApiService().getStates();
+        Call<List<Masters>> getState = AccountsApi.getApiService().getStates();
 
         getState.enqueue(new Callback<List<Masters>>() {
             @Override
@@ -192,7 +193,7 @@ public class Register extends Fragment {
 
     private void getDistrictList(String state_id) {
 
-        Call<List<Masters>> getDistrict = FetchApi.getApiService().getDistricts(state_id);
+        Call<List<Masters>> getDistrict = AccountsApi.getApiService().getDistricts(state_id);
         getDistrict.enqueue(new Callback<List<Masters>>() {
             @Override
             public void onResponse(@NotNull Call<List<Masters>> call, @NotNull Response<List<Masters>> response) {
@@ -211,7 +212,7 @@ public class Register extends Fragment {
     }
 
     private void getCityList(String district_id) {
-        Call<List<Masters>> getCity = FetchApi.getApiService().getCities(district_id);
+        Call<List<Masters>> getCity = AccountsApi.getApiService().getCities(district_id);
         getCity.enqueue(new Callback<List<Masters>>() {
             @Override
             public void onResponse(@NotNull Call<List<Masters>> call, @NotNull Response<List<Masters>> response) {
@@ -230,7 +231,7 @@ public class Register extends Fragment {
     }
 
     private void getLocalityList(String city_id) {
-        Call<List<Masters>> getLocality = FetchApi.getApiService().getLocalities(city_id);
+        Call<List<Masters>> getLocality = AccountsApi.getApiService().getLocalities(city_id);
         getLocality.enqueue(new Callback<List<Masters>>() {
             @Override
             public void onResponse(@NotNull Call<List<Masters>> call, @NotNull Response<List<Masters>> response) {
@@ -247,7 +248,7 @@ public class Register extends Fragment {
     }
 
     private void getPostalCodeList(String locality_id) {
-        Call<List<Masters>> getPostalCode = FetchApi.getApiService().getPostalCodes(locality_id);
+        Call<List<Masters>> getPostalCode = AccountsApi.getApiService().getPostalCodes(locality_id);
         getPostalCode.enqueue(new Callback<List<Masters>>() {
             @Override
             public void onResponse(@NotNull Call<List<Masters>> call, @NotNull Response<List<Masters>> response) {
@@ -299,7 +300,7 @@ public class Register extends Fragment {
         return ids;
     }
 
-
+    // TODO: 27-Mar-20 Need to send correct gender 
     private void customerRegistration() {
 
         name = etName.getText().toString();
@@ -345,7 +346,7 @@ public class Register extends Fragment {
 
             Customer customer = new Customer("", name, name, state_id, district_id, city_id, locality_id, postal_code_id, mobile1, address, email, password);
 
-            Call<Received> createCustomerCall = FetchApi.getApiService().registerCustomer(customer);
+            Call<Received> createCustomerCall = AccountsApi.getApiService().registerCustomer(customer);
             createCustomerCall.enqueue(new Callback<Received>() {
                 @Override
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
