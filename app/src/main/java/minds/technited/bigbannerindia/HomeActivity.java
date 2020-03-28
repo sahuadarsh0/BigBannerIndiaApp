@@ -22,6 +22,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import minds.technited.asavideoslider.MediaSlider;
@@ -134,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Call<Received> versionCheck = FetchApi.getApiService().checkVersion();
         versionCheck.enqueue(new Callback<Received>() {
             @Override
-            public void onResponse(Call<Received> call, Response<Received> response) {
+            public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
 
                 Received data = response.body();
 
@@ -146,23 +148,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     dialog.setContentView(R.layout.dialog_update_app);
                     Button btn = dialog.findViewById(R.id.btn_ok);
 
-                    new Handler().postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            dialog.show();
-                        }
-                    }, 4000);
+                    new Handler().postDelayed(dialog::show, 4000);
 
                     dialog.setCancelable(true);
-                    btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                    btn.setOnClickListener(v -> {
 
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FetchApi.base_url+"app"));
-                            startActivity(browserIntent);
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FetchApi.base_url+"app"));
+                        startActivity(browserIntent);
 
-                        }
                     });
                 }
             }

@@ -39,11 +39,11 @@ public class Register extends Fragment {
 
 
     private Context context, c, ca;
-    private String email, mobile1, state_id, district_id, city_id, locality_id, postal_code_id, password, cnf_password, name, address;
+    private String email, mobile1, state_id, district_id, city_id, locality_id, postal_code_id, password, cnf_password, name, address, gender;
     private TextInputEditText etName, etMobile1, etEmail, etAddress, etPassword, etcnf_password;
     private List<String> state_ids, district_ids, city_ids, locality_ids, postal_code_ids;
     private Spinner state_spinner, district_spinner, city_spinner, locality_spinner, postal_code_spinner;
-    private ChipGroup chipGroup;
+    private ChipGroup choiceChipGroup;
 
     public Register() {
         // Required empty public constructor
@@ -72,7 +72,8 @@ public class Register extends Fragment {
         etAddress = view.findViewById(R.id.address);
         etPassword = view.findViewById(R.id.password);
         etcnf_password = view.findViewById(R.id.cnf_password);
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_up);
+
+        Animation animation = AnimationUtils.loadAnimation(c, R.anim.slide_in_up);
         layout.startAnimation(animation);
         state_spinner = view.findViewById(R.id.state);
         district_spinner = view.findViewById(R.id.district);
@@ -93,6 +94,17 @@ public class Register extends Fragment {
 
         });
 
+        gender = "";
+        choiceChipGroup = view.findViewById(R.id.gender);
+        choiceChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            gender = "";
+            if (checkedId % 2 == 1) {
+                gender = "Male";
+            } else if (checkedId % 2 == 0) {
+                gender = "Female";
+            }
+
+        });
 
         // Get Spinners
         {
@@ -316,6 +328,8 @@ public class Register extends Fragment {
             Toast.makeText(c, "Name is empty", Toast.LENGTH_SHORT).show();
         } else if (mobile1.isEmpty()) {
             Toast.makeText(c, "Mobile number is empty", Toast.LENGTH_SHORT).show();
+        }else if (gender.equals("")) {
+            Toast.makeText(c, "Select Gender", Toast.LENGTH_SHORT).show();
         } else if (!mobile1.matches("[0-9]{10}")) {
             Toast.makeText(c, "Mobile number is invalid", Toast.LENGTH_SHORT).show();
         } else if (email.isEmpty()) {
@@ -344,7 +358,7 @@ public class Register extends Fragment {
 
         if (flag) {
 
-            Customer customer = new Customer("", name, name, state_id, district_id, city_id, locality_id, postal_code_id, mobile1, address, email, password);
+            Customer customer = new Customer("", name, gender, state_id, district_id, city_id, locality_id, postal_code_id, mobile1, address, email, password);
 
             Call<Received> createCustomerCall = AccountsApi.getApiService().registerCustomer(customer);
             createCustomerCall.enqueue(new Callback<Received>() {
