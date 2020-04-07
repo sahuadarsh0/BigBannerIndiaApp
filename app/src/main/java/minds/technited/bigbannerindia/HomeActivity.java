@@ -23,10 +23,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import minds.technited.asavideoslider.VideoSlider;
 
-import minds.technited.asavideoslider.MediaSlider;
 import minds.technited.bigbannerindia.models.Received;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,10 +58,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         home = findViewById(R.id.home);
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("https://res.cloudinary.com/kartiksaraf/video/upload/v1564516308/github_MediaSliderView/demo_videos/video1_jetay3.mp4");
-        list.add("https://res.cloudinary.com/kartiksaraf/video/upload/v1564516308/github_MediaSliderView/demo_videos/video2_sn3sek.mp4");
-        list.add("https://res.cloudinary.com/kartiksaraf/video/upload/v1564516308/github_MediaSliderView/demo_videos/video3_jcrsb3.mp4");
-        videoSlider = new MediaSlider(context, list, "video", false, true, false, "", "");
+
+        final String base_url = "http://bigbannerindia.com/admin/assets/uploads/slider/";
+
+        list.add(base_url+"53e36-cee433db3e9a3c26cf33bee4d71f2b3b.mp4");
+        list.add(base_url+"videoplayback.mp4");
+        list.add(base_url+"53e36-cee433db3e9a3c26cf33bee4d71f2b3b.mp4");
+        list.add(base_url+"13fba-vid-20200310-wa0002.mp4");
+        videoSlider = new VideoSlider(context, list);
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -113,18 +116,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 .addToBackStack(null)
                                 .commit();
                     }
-//                    if (item.getItemId() == R.id.invisible || item.getItemId() == R.id.home) {
-//
-//                        video_container.setVisibility(View.VISIBLE);
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.video_container, videoSlider)
-//                                .commit();
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.main_container, loginFrag)
-//                                .commit();
-//                    }
+                    if (item.getItemId() == R.id.invisible || item.getItemId() == R.id.home) {
+
+                        video_container.setVisibility(View.VISIBLE);
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.video_container, videoSlider)
+                                .commit();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_container, loginFrag)
+                                .commit();
+                    }
 
                     return false;
                 });
@@ -141,8 +144,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Received data = response.body();
 
                 assert data != null;
-
-                if (!data.getMsg().equals("0.1.0")) {
+                if (!data.getMsg().equals("0.2.0")) {
 
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.dialog_update_app);

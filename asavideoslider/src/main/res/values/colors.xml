@@ -3,6 +3,7 @@
     <color name="blackDark">#1d1c1c</color>
     <color name="progressbarColor">#ffffff</color>
     <color name="color_shadow">#44000000</color>
+<!--    <color name="transparent">#7BED0D0D</color>-->
     <color name="transparent">#5a000000</color>
     <color name="transparentWhite">#33FFFFFF</color>
     <color name="transparent_clear">#00000000</color>

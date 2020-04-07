@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
@@ -32,7 +31,7 @@ public class MediaSlider extends Fragment {
     private TextView slider_media_number;
     private long playbackPosition = 0;
     private int currentWindow = 0;
-    private boolean isTitleVisible, isMediaCountVisible, isNavigationVisible;
+    private boolean  isMediaCountVisible;
     private String title;
     private ArrayList<String> urlList;
     private String mediaType;
@@ -40,7 +39,6 @@ public class MediaSlider extends Fragment {
     private int startPosition = 0;
 
     Context context;
-    ArrayList<String> mediaUrlList;
 
 
     public MediaSlider() {
@@ -52,9 +50,7 @@ public class MediaSlider extends Fragment {
         this.context = context;
         this.urlList = urlList;
         this.mediaType = mediaType;
-        this.isTitleVisible = isTitleVisible;
         this.isMediaCountVisible = isMediaCountVisible;
-        this.isNavigationVisible = isNavigationVisible;
         this.title = title;
         this.titleTextColor = titleTextColor;
 
@@ -92,65 +88,44 @@ public class MediaSlider extends Fragment {
         mPager.setAdapter(new ScreenSlidePagerAdapter(getContext(), urlList, mediaType));
         setStartPosition();
         String hexRegex = "/^#(?:(?:[\\da-f]{3}){1,2}|(?:[\\da-f]{4}){1,2})$/i";
-        if (isTitleVisible || isMediaCountVisible) {
+        if ( isMediaCountVisible) {
 
             statusLayout.setBackgroundColor(getResources().getColor(R.color.transparent));
 
         }
-        if (isTitleVisible) {
-            slider_title.setVisibility(View.VISIBLE);
-            if (title != null) {
-                slider_title.setText(title);
-            } else {
-                slider_title.setText("");
-            }
-            if (titleTextColor != null && titleTextColor.matches(hexRegex)) {
-                slider_title.setTextColor(Color.parseColor(titleTextColor));
-            }
-        }
+
         if (isMediaCountVisible) {
             slider_media_number.setVisibility(View.VISIBLE);
             slider_media_number.setText((mPager.getCurrentItem() + 1) + "/" + urlList.size());
         }
-        if (isNavigationVisible) {
-            left.setVisibility(View.VISIBLE);
-            right.setVisibility(View.VISIBLE);
-            left.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int i = mPager.getCurrentItem();
-                    mPager.setCurrentItem(i - 1);
-                    slider_media_number.setText((mPager.getCurrentItem() + 1) + "/" + urlList.size());
-
-
-                }
-            });
-            right.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int i = mPager.getCurrentItem();
-                    mPager.setCurrentItem(i + 1);
-                    slider_media_number.setText((mPager.getCurrentItem() + 1) + "/" + urlList.size());
-
-                }
-            });
-        }
-
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-                if (mediaType.equalsIgnoreCase("video")) {
-                    View viewTag = mPager.findViewWithTag("view" + i);
-                    PlayerView simpleExoPlayerView = viewTag.findViewById(R.id.video_view);
-                    if (simpleExoPlayerView.getPlayer() != null) {
-                        SimpleExoPlayer player = (SimpleExoPlayer) simpleExoPlayerView.getPlayer();
-                        playbackPosition = player.getCurrentPosition();
-                        currentWindow = player.getCurrentWindowIndex();
-                        player.setPlayWhenReady(false);
-
-                    }
+                View viewTag = mPager.findViewWithTag("view" + i);
+                PlayerView simpleExoPlayerView = viewTag.findViewById(R.id.video_view);
+                if (simpleExoPlayerView.getPlayer() != null) {
+                    SimpleExoPlayer player = (SimpleExoPlayer) simpleExoPlayerView.getPlayer();
+                    playbackPosition = player.getCurrentPosition();
+                    currentWindow = player.getCurrentWindowIndex();
+                    player.setPlayWhenReady(true);
+//                        player.addListener(new Player.EventListener() {
+//                            @Override
+//                            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+//                                if (playbackState == Player.STATE_ENDED) {
+//                                    int i = mPager.getCurrentItem();
+//                                    if (i + 1 != urlList.size()) {
+//                                        mPager.setCurrentItem(i + 1);
+//                                        slider_media_number.setText((mPager.getCurrentItem()) + 1 + "/" + urlList.size());
+//                                    } else {
+//                                        mPager.setCurrentItem(0);
+//                                        slider_media_number.setText((1) + "/" + urlList.size());
+//                                    }
+//                                }
+//                            }
+//                        });
                 }
             }
+
 
             @Override
             public void onPageSelected(int i) {
@@ -226,21 +201,10 @@ public class MediaSlider extends Fragment {
 
                 simpleExoPlayerView.setPlayer(player);
                 player.prepare(mediaSource, true, true);
-                player.setPlayWhenReady(false);
-                player.addListener(new Player.EventListener() {
-                    @Override
-                    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                        if (playbackState == Player.STATE_ENDED) {
-                            int i = mPager.getCurrentItem();
-                            if (i+1 != urlList.size()) {
-                                mPager.setCurrentItem(i+1);
-                                slider_media_number.setText((mPager.getCurrentItem())+1 + "/" + urlList.size());
-                            } else { mPager.setCurrentItem(0);
-                                slider_media_number.setText((1) + "/" + urlList.size());
-                            }
-                        }
-                    }
-                });
+                if (position != 0)
+                    player.setPlayWhenReady(false);
+                else
+                    player.setPlayWhenReady(true);
                 player.seekTo(0, 0);
             }
             container.addView(view);
