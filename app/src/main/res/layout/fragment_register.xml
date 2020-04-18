@@ -231,7 +231,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_district" />
+                        android:src="@drawable/ic_snowflake" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -266,7 +266,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_district" />
+                        android:src="@drawable/ic_snowflake" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -300,7 +300,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_city" />
+                        android:src="@drawable/ic_snowflake" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -335,7 +335,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_location_pin" />
+                        android:src="@drawable/ic_snowflake" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -406,7 +406,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:drawableStart="@drawable/ic_house"
+                        android:drawableStart="@drawable/ic_home"
                         android:drawablePadding="10dp"
                         android:inputType="text"
                         android:maxLines="1"
@@ -496,7 +496,7 @@
             android:layout_height="165dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/new_corner2"
-            android:backgroundTint="@color/quantum_amber600"
+            android:backgroundTint="@color/bbi"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.433"

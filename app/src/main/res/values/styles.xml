@@ -38,15 +38,15 @@
 
         <item name="cornerRadius">5dp</item>
         <item name="textAllCaps">false</item>
-        <item name="rippleColor">@color/colorDark</item>
+        <item name="rippleColor">@color/colorBottomDark</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorDark</item>
         <item name="android:textSize">14sp</item>
 
     </style>
 
-    <style name="RoundedButton.Amber">
-        <item name="backgroundTint">@color/colorBottomDark</item>
+    <style name="RoundedButton.fill">
+        <item name="backgroundTint">@color/bbi</item>
     </style>
    <style name="RoundedButton.stroke"  parent="Widget.MaterialComponents.Button.OutlinedButton">
        <item name="cornerRadius">5dp</item>
@@ -56,14 +56,14 @@
        <item name="rippleColor">@color/colorBottomDark</item>
        <item name="android:textColor">@color/colorDark</item>
         <item name="backgroundTint">@color/white</item>
-        <item name="strokeColor">@color/quantum_amber400</item>
+       <item name="strokeColor">@color/bbi</item>
         <item name="strokeWidth">2dp</item>
     </style>
 
 
 
     <style name="SquareButton.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="strokeColor">@color/quantum_amber600</item>
+        <item name="strokeColor">@color/bbi</item>
         <item name="cornerRadius">3dp</item>
         <item name="backgroundTint">@color/colorDark</item>
         <item name="textAllCaps">false</item>

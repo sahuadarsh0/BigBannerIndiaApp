@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +25,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
-import java.util.ArrayList;
-import minds.technited.asavideoslider.VideoSlider;
 
+import java.util.ArrayList;
+
+import minds.technited.asavideoslider.VideoSlider;
 import minds.technited.bigbannerindia.models.Received;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +56,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context = this;
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         video_container = findViewById(R.id.video_container);
         home = findViewById(R.id.home);
 
@@ -61,11 +65,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         final String base_url = "http://bigbannerindia.com/admin/assets/uploads/slider/";
 
-        list.add(base_url+"53e36-cee433db3e9a3c26cf33bee4d71f2b3b.mp4");
-        list.add(base_url+"videoplayback.mp4");
-        list.add(base_url+"53e36-cee433db3e9a3c26cf33bee4d71f2b3b.mp4");
-        list.add(base_url+"13fba-vid-20200310-wa0002.mp4");
+        list.add(base_url + "53e36-cee433db3e9a3c26cf33bee4d71f2b3b.mp4");
+        list.add(base_url + "videoplayback.mp4");
+        list.add(base_url + "53e36-cee433db3e9a3c26cf33bee4d71f2b3b.mp4");
+        list.add(base_url + "13fba-vid-20200310-wa0002.mp4");
         videoSlider = new VideoSlider(context, list);
+
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -73,17 +78,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-//        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemIconTintList(null);
         fm.beginTransaction().add(R.id.main_container, homeFrag, "1").commit();
+        fm.beginTransaction()
+                .add(R.id.video_container, videoSlider)
+                .commit();
         bottomNavigationView.getBackground().setAlpha(0);
         bottomNavigationView.setBackgroundResource(R.drawable.transparent_background);
+        bottomNavigationView.setItemBackground(null);
+        video_container.setVisibility(View.VISIBLE);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
                     Fragment active = null;
 
                     video_container.setVisibility(View.GONE);
-
+                    getSupportFragmentManager().beginTransaction()
+                            .remove(videoSlider)
+                            .commit();
                     switch (item.getItemId()) {
 
                         case R.id.menu:
@@ -104,9 +116,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             active = homeFrag;
                             break;
 
-                        case R.id.invisible:
-                            active = homeFrag;
-                            break;
 
                     }
                     if (active != null) {
@@ -123,16 +132,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 .beginTransaction()
                                 .replace(R.id.video_container, videoSlider)
                                 .commit();
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_container, loginFrag)
-                                .commit();
+
                     }
 
                     return false;
                 });
 
-        home.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.main_container, homeFrag).commit());
+        home.setOnClickListener(v -> {
+            Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show();
+
+            video_container.setVisibility(View.VISIBLE);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.video_container, videoSlider)
+                    .commit();
+
+
+        });
 
 
         // Check For Update
@@ -155,7 +171,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     dialog.setCancelable(true);
                     btn.setOnClickListener(v -> {
 
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FetchApi.base_url+"app"));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FetchApi.base_url + "app"));
                         startActivity(browserIntent);
 
                     });
@@ -179,7 +195,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
 
-            case android.R.id.home:
+//            case android.R.id.home:
 
         }
 

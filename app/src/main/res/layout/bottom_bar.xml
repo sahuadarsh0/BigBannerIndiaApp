@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:clickable="false"
-        app:backgroundTint="@color/colorDark"
+        app:backgroundTint="@color/white"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
         app:fabAlignmentMode="center">
@@ -26,14 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            app:itemBackground="@color/transparent"
             android:background="@android:color/transparent"
             android:outlineAmbientShadowColor="@android:color/transparent"
             android:outlineSpotShadowColor="@android:color/transparent"
-            app:itemIconTint="@color/quantum_amber400"
-            app:itemTextColor="@color/colorLight"
+            app:itemTextColor="@color/colorDark"
             app:labelVisibilityMode="labeled"
-            app:itemRippleColor="@color/quantum_amber400"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -50,13 +47,13 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:src="@drawable/ic_home"
-        app:backgroundTint="@color/quantum_amber600"
+        app:backgroundTint="@color/white"
         app:fabSize="normal"
         app:elevation="6dp"
         app:borderWidth="0dp"
         app:layout_anchor="@+id/bottom_bar"
-        app:rippleColor="@color/colorDark"
-        app:tint="@color/colorDark" />
+        app:rippleColor="@color/colorBottomDark"
+        app:tint="@null" />
 
 
 
