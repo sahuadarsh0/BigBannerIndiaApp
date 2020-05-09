@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +40,6 @@ import java.util.ArrayList;
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
 
 
-    private static int first = 0;
     private boolean mState = false;
     private int counter = 0;
     private Context context;
@@ -76,13 +76,13 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         mholder[position] = holder;
 
         holder.mediaUri = Uri.parse(urlList.get(position));
-        if (first >= 0 && first <= urlList.size()) {
-            holder.mediaSource = new ProgressiveMediaSource.Factory(holder.dataSourceFactory)
-                    .createMediaSource(holder.mediaUri);
-        } else {
-            holder.mediaSource = new ProgressiveMediaSource.Factory(holder.cacheDataSourceFactory)
-                    .createMediaSource(holder.mediaUri);
-        }
+//        if (first >= 0 && first <= urlList.size()) {
+//            holder.mediaSource = new ProgressiveMediaSource.Factory(holder.dataSourceFactory)
+//                    .createMediaSource(holder.mediaUri);
+//        } else {
+        holder.mediaSource = new ProgressiveMediaSource.Factory(holder.cacheDataSourceFactory)
+                .createMediaSource(holder.mediaUri);
+//        }
 
         holder.simpleExoPlayerView.setPlayer(holder.player);
         holder.simpleExoPlayerView.hideController();
@@ -112,6 +112,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
                     }
 
                 }
+                holder.showProgressBar(holder.player, holder.progressBar);
 
             }
         });
@@ -125,7 +126,13 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
                     if (positionOffsetPixels == 0) {
                         holder.player.seekTo(0);
                         holder.player.setPlayWhenReady(false);
+
                     }
+                }
+                if (position == position1) {
+                    holder.player.seekTo(0);
+                    holder.player.setPlayWhenReady(true);
+
                 }
             }
 
@@ -140,12 +147,12 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
             }
         });
 
-        if (!(first >= 0 && first <= urlList.size())) {
-            holder.dataSpec = new DataSpec(holder.mediaUri);
-            holder.cacheVideo(holder.dataSpec, holder.defaultCacheKeyFactory, holder.dataSource, holder.progressListener);
+//        if (!(first >= 0 && first <= urlList.size())) {
+//        holder.dataSpec = new DataSpec(holder.mediaUri);
+//        holder.cacheVideo(holder.dataSpec, holder.defaultCacheKeyFactory, holder.dataSource, holder.progressListener);
 
-        }
-        first++;
+//        }
+//        first++;
     }
 
     @Override
@@ -192,6 +199,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         MediaSource mediaSource;
         DataSource.Factory dataSourceFactory;
         Uri mediaUri;
+        ProgressBar progressBar;
 
 
         ExoDatabaseProvider exoDatabaseProvider;
@@ -211,6 +219,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
             simpleExoPlayerView = view.findViewById(R.id.video_view);
             player = new SimpleExoPlayer.Builder(context).build();
             dataSourceFactory = new DefaultHttpDataSourceFactory("asa-video-slider");
+            progressBar = view.findViewById(R.id.progress_horizontal);
 
             exoDatabaseProvider = new ExoDatabaseProvider(context);
             cacheFolder = new File(context.getFilesDir(), "video_" + counter());
@@ -260,6 +269,13 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
             }
         }
 
+        private void showProgressBar(SimpleExoPlayer player, ProgressBar progressBar) {
+            if (player.isPlaying()) {
+                progressBar.setVisibility(View.GONE);
+            } else if (player.isLoading()) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 

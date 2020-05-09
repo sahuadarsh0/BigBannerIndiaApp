@@ -6,7 +6,7 @@
     <item name="colorPrimary">@color/colorPrimaryBlackDark</item>
     <item name="colorPrimaryDark">@color/colorLightDark</item>
     <item name="colorAccent">@color/colorBottomDark</item>
-    <item name="android:fontFamily">sans-serif</item>
+    <item name="android:fontFamily">@font/amita</item>
     <item name="windowActionBar">false</item>
     <item name="windowActionBarOverlay">true</item>
     <item name="windowNoTitle">true</item>

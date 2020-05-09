@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:layout_anchor="@id/crouton_top"
         android:clickable="false"
         app:backgroundTint="@color/white"
         app:contentInsetStart="0dp"
@@ -56,5 +57,10 @@
         app:tint="@null" />
 
 
+    <FrameLayout
+        android:id="@+id/crouton_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,9 +4,11 @@ import android.util.Log;
 
 import java.util.List;
 
+import minds.technited.bigbannerindia.models.Category;
 import minds.technited.bigbannerindia.models.Customer;
 import minds.technited.bigbannerindia.models.Masters;
 import minds.technited.bigbannerindia.models.Received;
+import minds.technited.bigbannerindia.models.Slider;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -20,10 +22,9 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-class FetchApi {
+class HomeApi {
 
-     static final String base_url = "http://bigbannerindia.com/admin/api/";
-//    private static final String base_url = "http://192.168.43.102/Bigbannerindia.com/admin/api/";
+    public static final String base_url = API.BASE_URL.toString();
 
 
     private static ApiService apiService = null;
@@ -56,11 +57,11 @@ class FetchApi {
         @GET("version/")
         Call<Received> checkVersion();
 
-        @GET("district/{id}")
-        Call<List<Masters>> getDistricts(@Path("id") String id);
+        @GET("slider_videos/")
+        Call<List<Slider>> getSliderVideos();
 
-        @GET("city/{id}")
-        Call<List<Masters>> getCities(@Path("id") String id);
+        @GET("categories/")
+        Call<List<Category>> getCategories();
 
         @GET("locality/{id}")
         Call<List<Masters>> getLocalities(@Path("id") String id);
@@ -72,7 +73,6 @@ class FetchApi {
         @Headers("Content-Type: application/json")
         @POST("customer_register")
         Call<Received> registerCustomer(@Body Customer customer);
-
 
 
         @FormUrlEncoded

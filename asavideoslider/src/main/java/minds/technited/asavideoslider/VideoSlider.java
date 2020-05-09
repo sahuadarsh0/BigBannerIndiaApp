@@ -25,7 +25,7 @@ public class VideoSlider extends Fragment {
     private ViewPager2 pager2;
     private ArrayList<String> urlList;
     private Context context;
-    SliderAdapter sliderAdapter;
+    private SliderAdapter sliderAdapter;
 
 
     public VideoSlider(Context context, ArrayList<String> urlList) {
@@ -70,6 +70,7 @@ public class VideoSlider extends Fragment {
 
         slider_media_number.setVisibility(View.VISIBLE);
         slider_media_number.setText((pager2.getCurrentItem() + 1) + "/" + urlList.size());
+
 
         return view;
     }

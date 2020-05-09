@@ -15,6 +15,7 @@ object MD {
         }
     }
 
+
     @JvmStatic
     fun alert(context: FragmentActivity, title: String?, message: String?, button: String?, container: Int, frag: Fragment = Fragment(0)) {
         MaterialDialog(context).show {

@@ -1,2 +1,14 @@
-<manifest
-    package="minds.technited.asavideoslider" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="minds.technited.asavideoslider">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <application>
+        <!--        android:icon="@drawable/icon"-->
+
+        <service
+            android:name=".MyService"
+            android:label="MyService">
+
+        </service>
+    </application>
+</manifest>

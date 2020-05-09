@@ -22,8 +22,8 @@ import retrofit2.http.Path;
 
 class AccountsApi {
 
-    private static final String base_url = "http://bigbannerindia.com/admin/api/";
-//    private static final String base_url = "http://192.168.43.102/Bigbannerindia.com/admin/api/";
+
+    private static final String base_url = API.BASE_URL.toString();
 
     private static ApiService apiService = null;
 
@@ -31,13 +31,11 @@ class AccountsApi {
 
 
         if (apiService == null) {
-            //create Ok HttP Client
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(s -> Log.d("ASA", s));
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(httpLoggingInterceptor);
 
-//            create
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(base_url)
                     .addConverterFactory(GsonConverterFactory.create())
