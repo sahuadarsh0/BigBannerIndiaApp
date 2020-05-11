@@ -1,6 +1,7 @@
 package minds.technited.bigbannerindia.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,15 @@ import java.util.List;
 
 import minds.technited.bigbannerindia.API;
 import minds.technited.bigbannerindia.R;
+import minds.technited.bigbannerindia.ShopActivity;
 import minds.technited.bigbannerindia.models.Shop;
 
-public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapter.ShopViewHolder> {
+public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopViewHolder> {
 
     private List<Shop> shops;
     private Context context;
 
-    public ShopCategoryAdapter(Context context, List<Shop> shops) {
+    public AllShopAdapter(Context context, List<Shop> shops) {
         this.context = context;
         this.shops = shops;
     }
@@ -34,21 +36,27 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
     @Override
     public ShopViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_shop_category, parent, false);
+        View view = inflater.inflate(R.layout.item_shop, parent, false);
         return new ShopViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ShopViewHolder holder, int position) {
         Shop s = shops.get(position);
-//        holder.recycler_shops.setAdapter(new CategoryAdapter(c.getShops(),context));
-//        holder.banner
 
         if (s.getOffer().size() > 0) {
             holder.total_offer.setText(s.getOffer().size() + "");
         } else {
             holder.offer_layout.setVisibility(View.GONE);
         }
+
+        holder.banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ShopActivity.class);
+                context.startActivity(i);
+            }
+        });
 
         String url = API.BANNER_FOLDER.toString() + s.getBanner();
         Glide

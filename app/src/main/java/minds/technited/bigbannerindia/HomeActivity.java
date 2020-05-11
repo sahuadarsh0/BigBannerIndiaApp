@@ -32,7 +32,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import minds.technited.asautils.ProcessDialog;
 import minds.technited.asavideoslider.VideoSlider;
+import minds.technited.bigbannerindia.models.Category;
 import minds.technited.bigbannerindia.models.Received;
 import minds.technited.bigbannerindia.models.Slider;
 import retrofit2.Call;
@@ -50,13 +52,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     NavigationView navigationView;
 
-    Fragment homeFrag = new Home(this);
+    Fragment homeFrag;
     Fragment loginFrag = new Login(this);
     Fragment registerFrag = new Register(this);
+    Fragment shopsFrag;
     Fragment videoSliderFrag;
     FrameLayout video_container;
     KNetwork.Request knRequest;
     String version;
+    ProcessDialog processDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +79,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         knRequest.setInAnimation(R.anim.bottom_in)
                 .setOutAnimation(R.anim.bottom_out)
                 .setViewGroupResId(R.id.crouton_top);
-
-
-//         Get All Slider Videos
-        getSliderVideos();
-
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -117,7 +116,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             break;
 
                         case R.id.shops:
-                            active = homeFrag;
+                            active = shopsFrag;
                             break;
 
 
@@ -161,6 +160,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+        processDialog = new ProcessDialog(this);
+        processDialog.show();
+        bottomNavigationView.setVisibility(View.GONE);
+
+//
+////         Get All Slider Videos
+//        getSliderVideos();
+//         Get All Categories
+        getCategories();
+
+
 //         Check For Update
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -168,6 +178,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
         checkUpdate();
 
     }
@@ -190,6 +201,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFailure(Call<List<Slider>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getCategories() {
+
+        Call<List<Category>> getCategory = HomeApi.getApiService().getCategories();
+        getCategory.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                List<Category> category;
+                category = response.body();
+                homeFrag = new Home(HomeActivity.this, category);
+                shopsFrag = new Shops(HomeActivity.this, category);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+                processDialog.dismiss();
+
+
+//         Get All Slider Videos
+                getSliderVideos();
+//                recycler_categories.setAdapter(new CategoryAdapter(context, category));
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
 
             }
         });

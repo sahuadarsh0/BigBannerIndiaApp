@@ -38,7 +38,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         Category c = categories.get(position);
         holder.category.setText(c.getCategory());
-        holder.recycler_shops.setAdapter(new ShopCategoryAdapter(context, c.getShop()));
+        if (c.getShop().size() > 0)
+            holder.recycler_shops.setAdapter(new ShopCategoryAdapter(context, c.getShop()));
+        else
+            holder.category.setVisibility(View.GONE);
+
     }
 
     @Override

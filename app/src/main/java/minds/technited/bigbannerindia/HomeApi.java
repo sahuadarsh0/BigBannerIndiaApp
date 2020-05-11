@@ -12,6 +12,8 @@ import minds.technited.bigbannerindia.models.Slider;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
@@ -84,6 +86,21 @@ class HomeApi {
 
     }
 
+    static public void Category() {
 
+        Call<List<Category>> getCategory = HomeApi.getApiService().getCategories();
+        getCategory.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                List<Category> category = response.body();
+//                recycler_categories.setAdapter(new CategoryAdapter(context, category));
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
+            }
+        });
+    }
 }
 
