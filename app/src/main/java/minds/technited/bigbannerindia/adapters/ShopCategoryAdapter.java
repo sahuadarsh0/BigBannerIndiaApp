@@ -1,6 +1,9 @@
 package minds.technited.bigbannerindia.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import minds.technited.bigbannerindia.API;
 import minds.technited.bigbannerindia.R;
+import minds.technited.bigbannerindia.ShopActivity;
 import minds.technited.bigbannerindia.models.Shop;
 
 public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapter.ShopViewHolder> {
@@ -40,15 +46,27 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ShopViewHolder holder, int position) {
-        Shop s = shops.get(position);
-//        holder.recycler_shops.setAdapter(new CategoryAdapter(c.getShops(),context));
-//        holder.banner
+
+        Parcelable shopParcelable = Parcels.wrap(shops.get(position));
+        Shop s = Parcels.unwrap(shopParcelable);
 
         if (s.getOffer().size() > 0) {
             holder.total_offer.setText(s.getOffer().size() + "");
         } else {
             holder.offer_layout.setVisibility(View.GONE);
         }
+
+
+        holder.banner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ShopActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("shop", shopParcelable);
+                i.putExtras(bundle);
+                context.startActivity(i);
+            }
+        });
 
         String url = API.BANNER_FOLDER.toString() + s.getBanner();
         Glide

@@ -1,5 +1,8 @@
 package minds.technited.bigbannerindia.models
 
+import org.parceler.Parcel
+
+@Parcel
 data class Shop(
         val product: List<Product?>? = null,
         val address: String? = null,

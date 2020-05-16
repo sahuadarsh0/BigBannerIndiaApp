@@ -1,5 +1,8 @@
 package minds.technited.bigbannerindia.models
 
+import org.parceler.Parcel
+
+@Parcel
 data class Offer(
         val image: String? = null,
         val cdt: String? = null,

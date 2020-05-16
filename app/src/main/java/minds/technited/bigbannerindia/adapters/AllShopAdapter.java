@@ -2,6 +2,8 @@ package minds.technited.bigbannerindia.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -42,7 +46,9 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
 
     @Override
     public void onBindViewHolder(@NonNull ShopViewHolder holder, int position) {
-        Shop s = shops.get(position);
+
+        Parcelable shopParcelable = Parcels.wrap(shops.get(position));
+        Shop s = Parcels.unwrap(shopParcelable);
 
         if (s.getOffer().size() > 0) {
             holder.total_offer.setText(s.getOffer().size() + "");
@@ -54,6 +60,9 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, ShopActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("shop", shopParcelable);
+                i.putExtras(bundle);
                 context.startActivity(i);
             }
         });

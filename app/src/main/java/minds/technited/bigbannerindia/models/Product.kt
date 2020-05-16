@@ -1,5 +1,8 @@
 package minds.technited.bigbannerindia.models
 
+import org.parceler.Parcel
+
+@Parcel
 data class Product(
         val requestStatus: String? = null,
         val image: String? = null,

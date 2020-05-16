@@ -1,7 +1,6 @@
 package minds.technited.bigbannerindia;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,26 +20,26 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.jetbrains.annotations.NotNull;
 
 import minds.technited.asautils.MD;
+import minds.technited.asautils.SharedPrefs;
 import minds.technited.bigbannerindia.models.Customer;
 import minds.technited.bigbannerindia.models.Received;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class Login extends Fragment {
 
 
-    private static final String PREFS = "PREFS";
     private Context context, c;
 
 
-    private SharedPreferences.Editor edit;
+    private SharedPrefs loginSharedPrefs;
+
     private TextInputEditText etMobile, etPassword;
 
     Login(Context context) {
         this.context = context;
+        loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
     }
 
     public Login() {
@@ -63,10 +62,7 @@ public class Login extends Fragment {
         c = getActivity().getApplicationContext();
 
 
-        SharedPreferences sp = c.getSharedPreferences(PREFS, MODE_PRIVATE);
-        edit = sp.edit();
-
-        if (sp.getString("customer_id", null) != null) {
+        if (loginSharedPrefs.get("customer_id") != null) {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new Account(context))
@@ -128,18 +124,19 @@ public class Login extends Fragment {
                         MD.alert(getActivity(), data.getMsg(), data.getDetails(), "ok", R.id.main_container, accountFrag);
 
                         assert loggedCustomer != null;
-                        edit.putString("customer_id", loggedCustomer.getId());
-                        edit.putString("name", loggedCustomer.getName());
-                        edit.putString("gender", loggedCustomer.getGender());
-                        edit.putString("state", loggedCustomer.getState());
-                        edit.putString("district", loggedCustomer.getDistrict());
-                        edit.putString("city", loggedCustomer.getCity());
-                        edit.putString("locality", loggedCustomer.getLocality());
-                        edit.putString("postalCode", loggedCustomer.getPostalCode());
-                        edit.putString("mobile", loggedCustomer.getMobile());
-                        edit.putString("email", loggedCustomer.getEmail());
-                        edit.putString("address", loggedCustomer.getAddress());
-                        edit.apply();
+                        loginSharedPrefs.set("customer_id", loggedCustomer.getId());
+                        loginSharedPrefs.set("name", loggedCustomer.getName());
+                        loginSharedPrefs.set("gender", loggedCustomer.getGender());
+                        loginSharedPrefs.set("state", loggedCustomer.getState());
+                        loginSharedPrefs.set("district", loggedCustomer.getDistrict());
+                        loginSharedPrefs.set("city", loggedCustomer.getCity());
+                        loginSharedPrefs.set("locality", loggedCustomer.getLocality());
+                        loginSharedPrefs.set("postalCode", loggedCustomer.getPostalCode());
+                        loginSharedPrefs.set("mobile", loggedCustomer.getMobile());
+                        loginSharedPrefs.set("email", loggedCustomer.getEmail());
+                        loginSharedPrefs.set("address", loggedCustomer.getAddress());
+                        loginSharedPrefs.apply();
+
                     } else
                         MD.alert(context, data.getMsg(), data.getDetails());
 

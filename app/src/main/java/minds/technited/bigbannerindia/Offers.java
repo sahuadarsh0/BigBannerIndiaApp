@@ -6,29 +6,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import minds.technited.asautils.SharedPrefs;
 
+public class Offers extends Fragment {
 
-public class Account extends Fragment {
-
+    private static final String PREFS = "PREFS";
     private Context context, c;
 
-    SharedPrefs loginSharedPrefs;
-
-    public Account() {
+    public Offers() {
         // Required empty public constructor
     }
 
 
-    public Account(Context context) {
+    public Offers(Context context) {
         this.context = context;
-        loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
     }
 
 
@@ -37,18 +32,6 @@ public class Account extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account,
                 container, false);
 
-
-
-        Button btnLogOut = view.findViewById(R.id.btnLogOut);
-        btnLogOut.setOnClickListener(v -> {
-
-            loginSharedPrefs.clearAll();
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_container, new Login(context))
-                            .commit();
-                }
-        );
 
         return view;
     }
