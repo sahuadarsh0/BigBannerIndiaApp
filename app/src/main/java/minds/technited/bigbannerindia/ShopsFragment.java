@@ -21,18 +21,18 @@ import minds.technited.bigbannerindia.models.Category;
 import minds.technited.bigbannerindia.models.Shop;
 
 
-public class Shops extends Fragment {
+public class ShopsFragment extends Fragment {
 
     private Context context;
     private List<Category> categories;
 
 
-    public Shops() {
+    public ShopsFragment() {
         // Required empty public constructor
     }
 
 
-    public Shops(Context context, List<Category> category) {
+    public ShopsFragment(Context context, List<Category> category) {
         this.context = context;
         this.categories = category;
     }

@@ -19,16 +19,17 @@ import minds.technited.bigbannerindia.adapters.CategoryAdapter;
 import minds.technited.bigbannerindia.models.Category;
 
 
-public class Home extends Fragment {
+public class HomeFragment extends Fragment {
 
     private Context context;
     private List<Category> category;
-    public Home() {
+
+    public HomeFragment() {
         // Required empty public constructor
     }
 
 
-    public Home(Context context, List<Category> category) {
+    public HomeFragment(Context context, List<Category> category) {
         this.context = context;
         this.category = category;
     }

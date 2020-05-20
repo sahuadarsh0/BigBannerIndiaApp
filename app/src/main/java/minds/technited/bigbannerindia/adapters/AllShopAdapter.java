@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +22,7 @@ import org.parceler.Parcels;
 import java.util.List;
 
 import minds.technited.bigbannerindia.API;
+import minds.technited.bigbannerindia.OffersFragment;
 import minds.technited.bigbannerindia.R;
 import minds.technited.bigbannerindia.ShopActivity;
 import minds.technited.bigbannerindia.models.Shop;
@@ -55,6 +57,16 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
         } else {
             holder.offer_layout.setVisibility(View.GONE);
         }
+        holder.offer_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager()
+                        .beginTransaction().addToBackStack(null)
+                        .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
+                        .commit();
+            }
+        });
 
         holder.banner.setOnClickListener(new View.OnClickListener() {
             @Override

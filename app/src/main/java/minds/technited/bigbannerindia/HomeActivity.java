@@ -53,8 +53,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
 
     Fragment homeFrag;
-    Fragment loginFrag = new Login(this);
-    Fragment registerFrag = new Register(this);
+    Fragment loginFrag = new LoginFragment(this);
+    Fragment registerFrag = new RegisterFragment(this);
     Fragment shopsFrag;
     Fragment videoSliderFrag;
     FrameLayout video_container;
@@ -214,8 +214,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 List<Category> category;
                 category = response.body();
-                homeFrag = new Home(HomeActivity.this, category);
-                shopsFrag = new Shops(HomeActivity.this, category);
+                homeFrag = new HomeFragment(HomeActivity.this, category);
+                shopsFrag = new ShopsFragment(HomeActivity.this, category);
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 processDialog.dismiss();
 

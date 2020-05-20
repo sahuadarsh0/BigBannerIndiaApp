@@ -7,4 +7,6 @@
     <string name="shop_by_category">Shop By Category</string>
     <string name="all_shops">All Shops</string>
     <string name="offers">Offers</string>
+    <string name="products">Products</string>
+    <string name="product_name">Product Name</string>
 </resources>

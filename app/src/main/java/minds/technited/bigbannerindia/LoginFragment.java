@@ -27,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Login extends Fragment {
+public class LoginFragment extends Fragment {
 
 
     private Context context, c;
@@ -37,12 +37,11 @@ public class Login extends Fragment {
 
     private TextInputEditText etMobile, etPassword;
 
-    Login(Context context) {
+    LoginFragment(Context context) {
         this.context = context;
-        loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
     }
 
-    public Login() {
+    public LoginFragment() {
 
     }
 
@@ -52,6 +51,7 @@ public class Login extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login,
                 container, false);
 
+        loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
         etMobile = view.findViewById(R.id.mobile);
         etPassword = view.findViewById(R.id.password);
         TextView register_text = view.findViewById(R.id.register_text);
@@ -76,13 +76,13 @@ public class Login extends Fragment {
         register_text.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, new Register(context))
+                    .replace(R.id.main_container, new RegisterFragment(context))
                     .commit();
         });
         register.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, new Register(context))
+                    .replace(R.id.main_container, new RegisterFragment(context))
                     .commit();
         });
         btnLogin.setOnClickListener(v -> customerLogin());

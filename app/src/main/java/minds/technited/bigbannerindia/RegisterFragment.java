@@ -35,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Register extends Fragment {
+public class RegisterFragment extends Fragment {
 
 
     private Context context, c, ca;
@@ -45,12 +45,12 @@ public class Register extends Fragment {
     private Spinner state_spinner, district_spinner, city_spinner, locality_spinner, postal_code_spinner;
     private ChipGroup choiceChipGroup;
 
-    public Register() {
+    public RegisterFragment() {
         // Required empty public constructor
     }
 
 
-    Register(Context context) {
+    RegisterFragment(Context context) {
         this.context = context;
     }
 
@@ -87,7 +87,7 @@ public class Register extends Fragment {
 
         login_text.setOnClickListener(v -> getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_container, new Login(context))
+                .replace(R.id.main_container, new LoginFragment(context))
                 .commit()
         );
         register_text.setOnClickListener(v -> {
@@ -366,7 +366,7 @@ public class Register extends Fragment {
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
 
                     Received data = response.body();
-                    Fragment loginFrag = new Login(getActivity());
+                    Fragment loginFrag = new LoginFragment(getActivity());
 
                     if (data.getMsg().equals("Successful"))
                         MD.alert(getActivity(), data.getMsg(), data.getDetails(), "Login", R.id.main_container, loginFrag);

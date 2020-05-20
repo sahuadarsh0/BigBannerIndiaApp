@@ -45,7 +45,7 @@ public class Account extends Fragment {
             loginSharedPrefs.clearAll();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_container, new Login(context))
+                            .replace(R.id.main_container, new LoginFragment(context))
                             .commit();
                 }
         );
