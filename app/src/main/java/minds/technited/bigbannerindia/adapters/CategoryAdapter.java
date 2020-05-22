@@ -23,6 +23,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public CategoryAdapter(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
+        setHasStableIds(true);
     }
 
 
@@ -43,6 +44,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         else
             holder.category.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override

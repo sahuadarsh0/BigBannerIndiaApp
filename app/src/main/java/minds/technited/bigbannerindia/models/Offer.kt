@@ -1,5 +1,6 @@
 package minds.technited.bigbannerindia.models
 
+import com.google.gson.annotations.SerializedName
 import org.parceler.Parcel
 
 @Parcel
@@ -9,5 +10,7 @@ data class Offer(
         val flag: String? = null,
         val name: String? = null,
         val id: String? = null,
+
+        @field:SerializedName("client_id")
         val clientId: String? = null
 )

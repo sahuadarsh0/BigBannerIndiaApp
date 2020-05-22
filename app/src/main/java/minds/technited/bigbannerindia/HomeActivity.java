@@ -227,6 +227,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
+                processDialog.dismiss();
 
             }
         });

@@ -28,6 +28,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
     public OfferAdapter(Context context, List<Offer> offers) {
         this.context = context;
         this.offers = offers;
+        setHasStableIds(true);
     }
 
     @NonNull
@@ -61,6 +62,16 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
                 .placeholder(R.drawable.offer)
                 .into(holder.offer_image);
 
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override

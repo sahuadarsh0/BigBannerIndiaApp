@@ -35,6 +35,7 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
     public ShopCategoryAdapter(Context context, List<Shop> shops) {
         this.context = context;
         this.shops = shops;
+        setHasStableIds(true);
     }
 
 
@@ -81,6 +82,16 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
                 .centerCrop()
                 .placeholder(R.drawable.banner)
                 .into(holder.banner);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
