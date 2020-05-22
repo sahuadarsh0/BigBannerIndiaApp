@@ -7,16 +7,27 @@
     android:fitsSystemWindows="true"
     tools:context=".ShopActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shrine_toolbar_collapsed_height"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ToolBarStyle" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/transparent_clear">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/shrine_toolbar_collapsed_height"
             app:contentScrim="@color/white"
             app:expandedTitleGravity="top"
             app:expandedTitleMarginStart="@dimen/shrine_toolbar_offset_start"
@@ -37,6 +48,7 @@
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/shrine_toolbar_collapsed_height"
+                app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ToolBarStyle" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>

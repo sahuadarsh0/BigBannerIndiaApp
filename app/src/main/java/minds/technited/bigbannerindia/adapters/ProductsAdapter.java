@@ -1,6 +1,7 @@
 package minds.technited.bigbannerindia.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import minds.technited.bigbannerindia.API;
+import minds.technited.bigbannerindia.ProductActivity;
 import minds.technited.bigbannerindia.R;
 import minds.technited.bigbannerindia.models.Product;
 
@@ -42,6 +45,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.product_name.setText(product.getName());
         holder.product_id.setText(product.getId());
 
+
+        holder.product_layout.setOnClickListener(v -> {
+            Intent i = new Intent(context, ProductActivity.class);
+            i.putExtra("product_id", holder.product_id.getText().toString());
+            context.startActivity(i);
+        });
+
         String url = API.PRODUCT_FOLDER.toString() + product.getImage();
         Glide
                 .with(context)
@@ -56,14 +66,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return products.size();
     }
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView product_image;
         TextView product_name;
         TextView product_id;
+        CardView product_layout;
 
-        public ProductViewHolder(@NonNull View itemView) {
+        ProductViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            product_layout = itemView.findViewById(R.id.product_layout);
             product_image = itemView.findViewById(R.id.product_image);
             product_name = itemView.findViewById(R.id.product_name);
             product_id = itemView.findViewById(R.id.product_id);

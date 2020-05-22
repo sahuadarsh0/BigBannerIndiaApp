@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="shrine_toolbar_offset_start">28dp</dimen>
-    <dimen name="shrine_toolbar_offset_top">16dp</dimen>
+    <dimen name="shrine_toolbar_offset_start">0dp</dimen>
+    <dimen name="shrine_toolbar_offset_top">0dp</dimen>
     <dimen name="shrine_toolbar_image_offset_top">18dp</dimen>
     <dimen name="shrine_toolbar_collapsed_height">60dp</dimen>
 </resources>

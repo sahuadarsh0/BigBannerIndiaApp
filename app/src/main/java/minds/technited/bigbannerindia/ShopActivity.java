@@ -24,9 +24,15 @@ public class ShopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
 
+        Shop shop = Parcels.unwrap(getIntent().getParcelableExtra("shop"));
+        assert shop != null;
+
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
         Toolbar toolbar = findViewById(R.id.toolBar);
+        Toolbar toolbar1 = findViewById(R.id.toolBar1);
+
+
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_left, null));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,9 +40,14 @@ public class ShopActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar1.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_left, null));
+        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
-        Shop shop = Parcels.unwrap(getIntent().getParcelableExtra("shop"));
-        assert shop != null;
 
 
         ImageView banner = findViewById(R.id.banner);
@@ -47,10 +58,10 @@ public class ShopActivity extends AppCompatActivity {
                 .placeholder(R.drawable.banner)
                 .into(banner);
 
-
-//        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(R.color.accent));
-//        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
-//        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+        collapsingToolbarLayout.setTitle(shop.getName());
+        toolbar1.setTitle(shop.getName());
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
         RecyclerView recycler_offers_container = findViewById(R.id.recycler_offers_container);
         recycler_offers_container.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));

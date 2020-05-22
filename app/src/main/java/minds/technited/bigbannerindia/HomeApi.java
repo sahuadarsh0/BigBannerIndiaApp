@@ -7,6 +7,7 @@ import java.util.List;
 import minds.technited.bigbannerindia.models.Category;
 import minds.technited.bigbannerindia.models.Customer;
 import minds.technited.bigbannerindia.models.Masters;
+import minds.technited.bigbannerindia.models.Product;
 import minds.technited.bigbannerindia.models.Received;
 import minds.technited.bigbannerindia.models.Slider;
 import okhttp3.OkHttpClient;
@@ -63,8 +64,8 @@ class HomeApi {
         @GET("categories/")
         Call<List<Category>> getCategories();
 
-        @GET("locality/{id}")
-        Call<List<Masters>> getLocalities(@Path("id") String id);
+        @GET("getProductDetails/{id}")
+        Call<List<Product>> getProductDetails(@Path("id") String id);
 
         @GET("postal_code/{id}")
         Call<List<Masters>> getPostalCodes(@Path("id") String id);

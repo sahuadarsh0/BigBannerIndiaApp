@@ -59,25 +59,19 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
         }
 
 
-        holder.banner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, ShopActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("shop", shopParcelable);
-                i.putExtras(bundle);
-                context.startActivity(i);
-            }
+        holder.banner.setOnClickListener(v -> {
+            Intent i = new Intent(context, ShopActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("shop", shopParcelable);
+            i.putExtras(bundle);
+            context.startActivity(i);
         });
-        holder.offer_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                activity.getSupportFragmentManager()
-                        .beginTransaction().addToBackStack(null)
-                        .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
-                        .commit();
-            }
+        holder.offer_layout.setOnClickListener(v -> {
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            activity.getSupportFragmentManager()
+                    .beginTransaction().addToBackStack(null)
+                    .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
+                    .commit();
         });
 
         String url = API.BANNER_FOLDER.toString() + s.getBanner();
@@ -94,12 +88,12 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
         return shops.size();
     }
 
-    public class ShopViewHolder extends RecyclerView.ViewHolder {
+    class ShopViewHolder extends RecyclerView.ViewHolder {
         TextView total_offer;
         ImageView banner;
         LinearLayout offer_layout;
 
-        public ShopViewHolder(@NonNull View itemView) {
+        ShopViewHolder(@NonNull View itemView) {
             super(itemView);
             total_offer = itemView.findViewById(R.id.total_offer);
             banner = itemView.findViewById(R.id.banner);

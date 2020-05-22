@@ -45,15 +45,12 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
         holder.offer_id.setText(offer.getId());
 
 
-        holder.offer_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                activity.getSupportFragmentManager()
-                        .beginTransaction().addToBackStack(null)
-                        .replace(R.id.shop_container, new OffersFragment(context, offers, position))
-                        .commit();
-            }
+        holder.offer_layout.setOnClickListener(v -> {
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            activity.getSupportFragmentManager()
+                    .beginTransaction().addToBackStack(null)
+                    .replace(R.id.shop_container, new OffersFragment(context, offers, position))
+                    .commit();
         });
 
         String url = API.OFFER_FOLDER.toString() + offer.getImage();
@@ -71,12 +68,12 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
         return offers.size();
     }
 
-    public class OfferViewHolder extends RecyclerView.ViewHolder {
+    class OfferViewHolder extends RecyclerView.ViewHolder {
         TextView offer_name, offer_id;
         ImageView offer_image;
         CardView offer_layout;
 
-        public OfferViewHolder(@NonNull View itemView) {
+        OfferViewHolder(@NonNull View itemView) {
             super(itemView);
 
             offer_id = itemView.findViewById(R.id.offer_id);
