@@ -7,6 +7,8 @@ data class Received(
 
         val details: String? = null,
 
-        val customer: Customer? = null
+        val customer: Customer? = null,
+
+        val extra: String? = null
 
 )

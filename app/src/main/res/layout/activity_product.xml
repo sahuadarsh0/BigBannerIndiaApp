@@ -63,20 +63,25 @@
         android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/quantum_teal50"
+        app:backgroundTint="@color/quantum_grey900"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"
+        app:tint="@null"
         app:srcCompat="@drawable/ic_white_like" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:drawableStart="@drawable/ic_action_right"
             android:drawablePadding="5dp"
             android:hint="Write Comments" />
@@ -84,6 +89,9 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:padding="10dp"
             android:src="@drawable/ic_send" />
 
     </LinearLayout>

@@ -6,7 +6,6 @@ import java.util.List;
 
 import minds.technited.bigbannerindia.models.Category;
 import minds.technited.bigbannerindia.models.Customer;
-import minds.technited.bigbannerindia.models.Masters;
 import minds.technited.bigbannerindia.models.Product;
 import minds.technited.bigbannerindia.models.Received;
 import minds.technited.bigbannerindia.models.Slider;
@@ -67,21 +66,24 @@ class HomeApi {
         @GET("getProductDetails/{id}")
         Call<List<Product>> getProductDetails(@Path("id") String id);
 
-        @GET("postal_code/{id}")
-        Call<List<Masters>> getPostalCodes(@Path("id") String id);
+        @FormUrlEncoded
+        @POST("likeProduct")
+        Call<Received> likeProduct(
+                @Field("product_id") String product_id,
+                @Field("customer_id") String customer_id
+        );
 
+        @FormUrlEncoded
+        @POST("requestProduct")
+        Call<Received> requestProduct(
+                @Field("product_id") String product_id,
+                @Field("customer_id") String customer_id
+        );
 
         @Headers("Content-Type: application/json")
         @POST("customer_register")
         Call<Received> registerCustomer(@Body Customer customer);
 
-
-        @FormUrlEncoded
-        @POST("customer_login")
-        Call<Received> loginCustomer(
-                @Field("mobile") String mobile,
-                @Field("password") String password
-        );
 
     }
 
