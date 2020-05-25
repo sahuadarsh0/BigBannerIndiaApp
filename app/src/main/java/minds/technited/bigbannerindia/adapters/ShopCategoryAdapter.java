@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +22,10 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import minds.technited.asautils.MD;
+import minds.technited.asautils.SharedPrefs;
 import minds.technited.bigbannerindia.API;
+import minds.technited.bigbannerindia.LoginFragment;
 import minds.technited.bigbannerindia.OffersFragment;
 import minds.technited.bigbannerindia.R;
 import minds.technited.bigbannerindia.ShopActivity;
@@ -31,10 +35,12 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
 
     private List<Shop> shops;
     private Context context;
+    SharedPrefs loginSharedPrefs;
 
     public ShopCategoryAdapter(Context context, List<Shop> shops) {
         this.context = context;
         this.shops = shops;
+        loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
         setHasStableIds(true);
     }
 
@@ -61,11 +67,19 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
 
 
         holder.banner.setOnClickListener(v -> {
-            Intent i = new Intent(context, ShopActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("shop", shopParcelable);
-            i.putExtras(bundle);
-            context.startActivity(i);
+            if (loginSharedPrefs.get("customer_id") == null) {
+
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment loginFragment = new LoginFragment(context);
+                MD.alert(activity, "Login Required", "To see shop details you have to login first", "ok", R.id.main_container, loginFragment);
+
+            } else {
+                Intent i = new Intent(context, ShopActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("shop", shopParcelable);
+                i.putExtras(bundle);
+                context.startActivity(i);
+            }
         });
         holder.offer_layout.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();

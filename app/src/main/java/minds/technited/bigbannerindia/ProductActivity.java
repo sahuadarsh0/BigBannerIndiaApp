@@ -1,9 +1,15 @@
 package minds.technited.bigbannerindia;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +28,7 @@ import minds.technited.asautils.MD;
 import minds.technited.asautils.ProcessDialog;
 import minds.technited.asautils.SharedPrefs;
 import minds.technited.bigbannerindia.adapters.CommentsAdapter;
+import minds.technited.bigbannerindia.models.Comment;
 import minds.technited.bigbannerindia.models.Like;
 import minds.technited.bigbannerindia.models.Product;
 import minds.technited.bigbannerindia.models.Received;
@@ -37,6 +44,8 @@ public class ProductActivity extends AppCompatActivity {
     Toolbar toolbar, toolbar1;
     FloatingActionButton like;
     private SharedPrefs loginSharedPrefs;
+    EditText comment_edit;
+    Comment comment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +68,7 @@ public class ProductActivity extends AppCompatActivity {
 
         like = findViewById(R.id.like);
         Button request_item = findViewById(R.id.request_item);
+        comment_edit = findViewById(R.id.comment_edit);
 
 
         request_item.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +86,50 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        comment_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    if (!comment_edit.getText().toString().equals("")) {
+                        comment = new Comment("", "", product_id, comment_edit.getText().toString(), "", "", "", loginSharedPrefs.get("customer_id"));
+                        processDialog.show();
+                        sendComment(comment);
+                    } else {
+                        Toast.makeText(ProductActivity.this, "Write Comments", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
+
+    }
+
+    private void sendComment(Comment comment) {
+
+        Call<Received> commentOnProduct = HomeApi.getApiService().commentOnProduct(comment);
+        commentOnProduct.enqueue(new Callback<Received>() {
+            @Override
+            public void onResponse(Call<Received> call, Response<Received> response) {
+
+                processDialog.dismiss();
+
+                Received data = response.body();
+                assert data != null;
+                Log.d("asa", "onResponse: " + data);
+                if (data.getMsg().equals("Successful")) {
+                    Toast.makeText(ProductActivity.this, data.getDetails(), Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
+            }
+
+            @Override
+            public void onFailure(Call<Received> call, Throwable t) {
+
+            }
+        });
     }
 
     private void requestProduct(String product_id, String customer_id) {

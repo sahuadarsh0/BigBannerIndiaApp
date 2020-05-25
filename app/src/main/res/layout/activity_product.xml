@@ -79,20 +79,16 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/comment_edit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
             android:drawableStart="@drawable/ic_action_right"
             android:drawablePadding="5dp"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:maxLines="1"
             android:hint="Write Comments" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:src="@drawable/ic_send" />
 
     </LinearLayout>
 

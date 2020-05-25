@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import minds.technited.bigbannerindia.models.Category;
-import minds.technited.bigbannerindia.models.Customer;
+import minds.technited.bigbannerindia.models.Comment;
 import minds.technited.bigbannerindia.models.Product;
 import minds.technited.bigbannerindia.models.Received;
 import minds.technited.bigbannerindia.models.Slider;
@@ -81,8 +81,8 @@ class HomeApi {
         );
 
         @Headers("Content-Type: application/json")
-        @POST("customer_register")
-        Call<Received> registerCustomer(@Body Customer customer);
+        @POST("commentOnProduct")
+        Call<Received> commentOnProduct(@Body Comment comment);
 
 
     }

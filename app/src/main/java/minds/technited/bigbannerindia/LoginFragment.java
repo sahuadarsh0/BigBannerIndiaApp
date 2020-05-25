@@ -37,7 +37,7 @@ public class LoginFragment extends Fragment {
 
     private TextInputEditText etMobile, etPassword;
 
-    LoginFragment(Context context) {
+    public LoginFragment(Context context) {
         this.context = context;
     }
 
