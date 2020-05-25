@@ -1,14 +1,9 @@
 package minds.technited.bigbannerindia;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.rezwan.knetworklib.KNetwork;
@@ -32,23 +27,6 @@ public class SplashActivity extends AppCompatActivity implements KNetwork.OnNetW
                 .showKNDialog(false)
                 .setConnectivityListener(this);
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkRequest.Builder builder = new NetworkRequest.Builder();
-
-        connectivityManager.registerNetworkCallback(builder.build(), new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onUnavailable() {
-                super.onUnavailable();
-
-
-            }
-
-            @Override
-            public void onAvailable(@NonNull Network network) {
-                super.onAvailable(network);
-
-            }
-        });
 
     }
 

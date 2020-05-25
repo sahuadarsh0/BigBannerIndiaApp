@@ -128,6 +128,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Received> call, Throwable t) {
 
+                Log.e("ASA", "onFailure: " + t.getMessage(), t);
             }
         });
     }
@@ -152,6 +153,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Received> call, Throwable t) {
 
+                Log.e("ASA", "onFailure: " + t.getMessage(), t);
             }
         });
 
@@ -181,6 +183,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Received> call, Throwable t) {
 
+                Log.e("ASA", "onFailure: " + t.getMessage(), t);
             }
         });
     }
@@ -212,6 +215,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
 
+                Log.e("ASA", "onFailure: " + t.getMessage(), t);
             }
         });
 

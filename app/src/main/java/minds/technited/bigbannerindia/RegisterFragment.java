@@ -288,6 +288,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onFailure(@NotNull Call<List<Masters>> call, @NotNull Throwable t) {
 
+                Log.e("ASA", "onFailure: " + t.getMessage(), t);
             }
         });
 
@@ -312,7 +313,6 @@ public class RegisterFragment extends Fragment {
         return ids;
     }
 
-    // TODO: 27-Mar-20 Need to send correct gender 
     private void customerRegistration() {
 
         name = etName.getText().toString();

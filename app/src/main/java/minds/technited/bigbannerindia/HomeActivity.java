@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
 
     Fragment homeFrag;
+    Fragment searchFrag;
     Fragment loginFrag = new LoginFragment(this);
     Fragment registerFrag = new RegisterFragment(this);
     Fragment shopsFrag;
@@ -112,7 +113,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
                         case R.id.search:
-                            active = homeFrag;
+                            active = searchFrag;
                             break;
 
                         case R.id.shops:
@@ -216,6 +217,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 category = response.body();
                 homeFrag = new HomeFragment(HomeActivity.this, category);
                 shopsFrag = new ShopsFragment(HomeActivity.this, category);
+                searchFrag = new SearchFragment(HomeActivity.this, category);
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 processDialog.dismiss();
 
@@ -320,4 +322,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Log.d("asa-network", "onNetDisConnected: Net is disconnected");
 
     }
+
 }
