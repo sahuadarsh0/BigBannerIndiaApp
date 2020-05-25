@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,14 +28,11 @@ import com.rezwan.knetworklib.KNetwork;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import minds.technited.asautils.ProcessDialog;
-import minds.technited.asavideoslider.VideoSlider;
 import minds.technited.bigbannerindia.models.Category;
 import minds.technited.bigbannerindia.models.Received;
-import minds.technited.bigbannerindia.models.Slider;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +43,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private FloatingActionButton home;
     Context context;
-    FragmentManager fm = getSupportFragmentManager();
 
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -57,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     Fragment loginFrag = new LoginFragment(this);
     Fragment registerFrag = new RegisterFragment(this);
     Fragment shopsFrag;
-    Fragment videoSliderFrag;
+    //    Fragment videoSliderFrag;
     FrameLayout video_container;
     KNetwork.Request knRequest;
     String version;
@@ -96,10 +91,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 item -> {
                     Fragment active = null;
 
-                    video_container.setVisibility(View.GONE);
-                    getSupportFragmentManager().beginTransaction()
-                            .remove(videoSliderFrag)
-                            .commit();
+//                    video_container.setVisibility(View.GONE);
+//                    getSupportFragmentManager().beginTransaction()
+//                            .remove(videoSliderFrag)
+//                            .commit();
+
+
                     switch (item.getItemId()) {
 
                         case R.id.menu:
@@ -131,11 +128,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }
                     if (item.getItemId() == R.id.invisible || item.getItemId() == R.id.home) {
 
-                        video_container.setVisibility(View.VISIBLE);
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.video_container, videoSliderFrag)
-                                .commit();
+//                        video_container.setVisibility(View.VISIBLE);
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.video_container, videoSliderFrag)
+//                                .commit();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.main_container, homeFrag)
@@ -147,11 +144,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 });
 
         home.setOnClickListener(v -> {
-            video_container.setVisibility(View.VISIBLE);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.video_container, videoSliderFrag)
-                    .commit();
+//            video_container.setVisibility(View.VISIBLE);
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.video_container, videoSliderFrag)
+//                    .commit();
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, homeFrag)
@@ -184,28 +181,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void getSliderVideos() {
-        Call<List<Slider>> videoSlider = HomeApi.getApiService().getSliderVideos();
-        videoSlider.enqueue(new Callback<List<Slider>>() {
-            @Override
-            public void onResponse(Call<List<Slider>> call, Response<List<Slider>> response) {
-
-                List<Slider> video = response.body();
-                ArrayList<String> list = new ArrayList<>();
-                assert video != null;
-                for (int i = 0; i < video.size(); i++) {
-                    list.add(API.VIDEO_SLIDER_FOLDER.toString() + video.get(i).getVideo());
-                }
-                videoSliderFrag = new VideoSlider(context, list);
-                showSlider();
-            }
-
-            @Override
-            public void onFailure(Call<List<Slider>> call, Throwable t) {
-
-            }
-        });
-    }
 
     private void getCategories() {
 
@@ -222,27 +197,51 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 processDialog.dismiss();
 
 
+                getSupportFragmentManager().beginTransaction().add(R.id.main_container, homeFrag, "1").commit();
+
 //         Get All Slider Videos
-                getSliderVideos();
+//                getSliderVideos();
 //                recycler_categories.setAdapter(new CategoryAdapter(context, category));
             }
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                processDialog.dismiss();
 
             }
         });
     }
 
-
-    private void showSlider() {
-        video_container.setVisibility(View.VISIBLE);
-        fm.beginTransaction().add(R.id.main_container, homeFrag, "1").commit();
-        fm.beginTransaction()
-                .add(R.id.video_container, videoSliderFrag)
-                .commit();
-    }
+//    private void getSliderVideos() {
+//        Call<List<Slider>> videoSlider = HomeApi.getApiService().getSliderVideos();
+//        videoSlider.enqueue(new Callback<List<Slider>>() {
+//            @Override
+//            public void onResponse(Call<List<Slider>> call, Response<List<Slider>> response) {
+//
+//                List<Slider> video = response.body();
+//                ArrayList<String> list = new ArrayList<>();
+//                assert video != null;
+//                for (int i = 0; i < video.size(); i++) {
+//                    list.add(API.VIDEO_SLIDER_FOLDER.toString() + video.get(i).getVideo());
+//                }
+//                videoSliderFrag = new VideoSlider(context, list);
+//                showSlider();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Slider>> call, Throwable t) {
+//
+//            }
+//        });
+//    }
+//
+//
+//    private void showSlider() {
+//        video_container.setVisibility(View.VISIBLE);
+//        fm.beginTransaction().add(R.id.main_container, homeFrag, "1").commit();
+//        fm.beginTransaction()
+//                .add(R.id.video_container, videoSliderFrag)
+//                .commit();
+//    }
 
 
     private void checkUpdate() {
