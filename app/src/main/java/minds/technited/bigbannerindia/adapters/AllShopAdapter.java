@@ -12,8 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,10 +24,9 @@ import java.util.List;
 import minds.technited.asautils.MD;
 import minds.technited.asautils.SharedPrefs;
 import minds.technited.bigbannerindia.API;
-import minds.technited.bigbannerindia.LoginFragment;
-import minds.technited.bigbannerindia.OffersFragment;
 import minds.technited.bigbannerindia.R;
 import minds.technited.bigbannerindia.ShopActivity;
+import minds.technited.bigbannerindia.ShopsFragmentDirections;
 import minds.technited.bigbannerindia.models.Shop;
 
 public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopViewHolder> {
@@ -58,6 +56,7 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
         Parcelable shopParcelable = Parcels.wrap(shops.get(position));
         Shop s = Parcels.unwrap(shopParcelable);
 
+        holder.srn.setText(s.getSrn());
         if (s.getOffer().size() > 0) {
             holder.total_offer.setText(s.getOffer().size() + "");
         } else {
@@ -66,20 +65,19 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
         holder.offer_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                activity.getSupportFragmentManager()
-                        .beginTransaction().addToBackStack(null)
-                        .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
-                        .commit();
+                //TODO: OFFERS FRAGMENT
+//                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+//                activity.getSupportFragmentManager()
+//                        .beginTransaction().addToBackStack(null)
+//                        .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
+//                        .commit();
             }
         });
 
         holder.banner.setOnClickListener(v -> {
             if (loginSharedPrefs.get("customer_id") == null) {
-
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                Fragment loginFragment = new LoginFragment(context);
-                MD.alert(activity, "Login Required", "To see shop details you have to login first", "ok", R.id.main_container, loginFragment);
+                NavDirections action = ShopsFragmentDirections.actionShopsFragmentToLoginFragment();
+                MD.alert(v.getContext(), "Login Required", "To see shop details you have to login first", "ok", v, action);
 
             } else {
                 Intent i = new Intent(context, ShopActivity.class);
@@ -106,12 +104,14 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
 
     class ShopViewHolder extends RecyclerView.ViewHolder {
         TextView total_offer;
+        TextView srn;
         ImageView banner;
         LinearLayout offer_layout;
 
         ShopViewHolder(@NonNull View itemView) {
             super(itemView);
             total_offer = itemView.findViewById(R.id.total_offer);
+            srn = itemView.findViewById(R.id.srn);
             banner = itemView.findViewById(R.id.banner);
             offer_layout = itemView.findViewById(R.id.offer_layout);
         }

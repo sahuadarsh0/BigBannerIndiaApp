@@ -12,6 +12,7 @@ data class Shop(
         @field:SerializedName("banner_id")
         val bannerId: String? = null,
 
+        val district: String? = null,
         val city: String? = null,
         val mobile: String? = null,
         val locality: String? = null,

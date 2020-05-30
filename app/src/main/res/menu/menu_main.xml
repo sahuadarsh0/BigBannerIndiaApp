@@ -3,25 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/accounts"
+        android:id="@+id/loginFragment"
         android:enabled="true"
         android:icon="@drawable/ic_user"
         android:title="Account"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="Search"
         app:showAsAction="always" />
     <item
-        android:id="@+id/invisible"
+        android:id="@+id/homeFragment"
         android:enabled="true"
         android:title=""
         app:showAsAction="always" />
+
     <item
-        android:id="@+id/shops"
+        android:id="@+id/shopsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_shop"
         android:title="Shops"

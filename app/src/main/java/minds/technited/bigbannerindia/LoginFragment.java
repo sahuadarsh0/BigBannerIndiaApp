@@ -12,8 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -29,29 +33,28 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
 
-
-    private Context context, c;
-
-
+    private Context context;
     private SharedPrefs loginSharedPrefs;
-
     private TextInputEditText etMobile, etPassword;
 
-    public LoginFragment(Context context) {
-        this.context = context;
-    }
-
     public LoginFragment() {
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login,
+        return inflater.inflate(R.layout.fragment_login,
                 container, false);
 
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        context = requireContext();
         loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
+
         etMobile = view.findViewById(R.id.mobile);
         etPassword = view.findViewById(R.id.password);
         TextView register_text = view.findViewById(R.id.register_text);
@@ -59,14 +62,10 @@ public class LoginFragment extends Fragment {
 
         ConstraintLayout layout = view.findViewById(R.id.request_layout);
         Button btnLogin = view.findViewById(R.id.login);
-        c = getActivity().getApplicationContext();
-
 
         if (loginSharedPrefs.get("customer_id") != null) {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_container, new Account(context))
-                    .commit();
+            NavDirections action = LoginFragmentDirections.actionLoginFragmentToAccountFragment();
+            Navigation.findNavController(view).navigate(action);
         }
 
 
@@ -74,20 +73,15 @@ public class LoginFragment extends Fragment {
         layout.startAnimation(animation);
 
         register_text.setOnClickListener(v -> {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_container, new RegisterFragment(context))
-                    .commit();
+            NavDirections action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment();
+            Navigation.findNavController(view).navigate(action);
         });
         register.setOnClickListener(v -> {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_container, new RegisterFragment(context))
-                    .commit();
+            NavDirections action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment();
+            Navigation.findNavController(view).navigate(action);
         });
         btnLogin.setOnClickListener(v -> customerLogin());
 
-        return view;
     }
 
     private void customerLogin() {
@@ -98,9 +92,9 @@ public class LoginFragment extends Fragment {
         boolean flag = false;
 
         if (mobile.isEmpty()) {
-            Toast.makeText(c, "MOBILE IS MISSING", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "MOBILE IS MISSING", Toast.LENGTH_SHORT).show();
         } else if (password.isEmpty()) {
-            Toast.makeText(c, "PASSWORD IS MISSING", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "PASSWORD IS MISSING", Toast.LENGTH_SHORT).show();
         } else {
             flag = true;
         }
@@ -114,14 +108,13 @@ public class LoginFragment extends Fragment {
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
 
                     Received data = response.body();
-                    Fragment accountFrag = new Account(getActivity());
-
                     assert data != null;
 
                     if (data.getMsg().equals("Successful")) {
                         Customer loggedCustomer = data.getCustomer();
 
-                        MD.alert(getActivity(), data.getMsg(), data.getDetails(), "ok", R.id.main_container, accountFrag);
+                        NavDirections action = LoginFragmentDirections.actionLoginFragmentToAccountFragment();
+                        MD.alert(getActivity(), data.getMsg(), data.getDetails(), "ok", getView(), action);
 
                         assert loggedCustomer != null;
                         loginSharedPrefs.set("customer_id", loggedCustomer.getId());
@@ -151,4 +144,5 @@ public class LoginFragment extends Fragment {
         }
 
     }
+
 }

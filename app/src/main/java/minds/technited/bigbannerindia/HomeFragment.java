@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,8 +31,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
     private Context context;
-    private List<Category> category;
-
+    private HomeActivityViewModel homeActivityViewModel;
     private Fragment videoSliderFrag;
 
 
@@ -39,25 +40,31 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public HomeFragment(Context context, List<Category> category) {
-        this.context = context;
-        this.category = category;
-    }
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home,
-                container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
 
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        homeActivityViewModel = new ViewModelProvider(requireActivity()).get(HomeActivityViewModel.class);
+        context = requireContext();
 
         RecyclerView recycler_categories = view.findViewById(R.id.recycler_categories);
         recycler_categories.setLayoutManager(new LinearLayoutManager(context));
-        recycler_categories.setAdapter(new CategoryAdapter(context, category));
+        homeActivityViewModel.category.observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                if (categories != null)
+                    recycler_categories.setAdapter(new CategoryAdapter(context, categories));
 
+            }
+        });
+
+
+//         Get All Slider Videos
         getSliderVideos();
-
-        return view;
     }
 
     private void getSliderVideos() {

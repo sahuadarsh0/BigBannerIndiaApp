@@ -34,9 +34,39 @@
                 android:src="@drawable/banner"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="2:1"
+                android:layout_marginBottom="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/TextBlackSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@color/quantum_grey100"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="SRN :"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/banner"
+                app:layout_constraintTop_toBottomOf="@+id/banner" />
+
+            <TextView
+                android:id="@+id/srn"
+                style="@style/TextBlackSmall"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/quantum_grey100"
+                android:gravity="start|center"
+                android:text="10248741578"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/banner"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/banner" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -81,4 +111,5 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_diamond" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,11 @@
 package minds.technited.asautils
 
 import android.content.Context
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.afollestad.materialdialogs.MaterialDialog
 
 object MD {
@@ -41,6 +44,22 @@ object MD {
                         .beginTransaction()
                         .replace(container, frag)
                         .commit()
+
+            }
+        }
+    }
+
+    @JvmStatic
+    fun alert(context: Context, title: String?, message: String?, button: String?, view: View, action: NavDirections) {
+        MaterialDialog(context).show {
+            title(text = title)
+            message(text = message)
+            cancelable(false)  // calls setCancelable on the underlying dialog
+            cancelOnTouchOutside(false)
+            positiveButton(text = button) {
+
+                Navigation.findNavController(view).navigate(action)
+
 
             }
         }

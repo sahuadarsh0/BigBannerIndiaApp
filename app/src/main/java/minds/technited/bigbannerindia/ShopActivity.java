@@ -3,6 +3,7 @@ package minds.technited.bigbannerindia;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -49,7 +50,7 @@ public class ShopActivity extends AppCompatActivity {
         });
 
 
-
+        TextView offers_text = findViewById(R.id.offers_text);
         ImageView banner = findViewById(R.id.banner);
         String url = API.BANNER_FOLDER.toString() + shop.getBanner();
         Glide
@@ -63,6 +64,8 @@ public class ShopActivity extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
+        if (shop.getOffer().size() == 0)
+            offers_text.setVisibility(View.INVISIBLE);
         RecyclerView recycler_offers_container = findViewById(R.id.recycler_offers_container);
         recycler_offers_container.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recycler_offers_container.setAdapter(new OfferAdapter(this, shop.getOffer()));

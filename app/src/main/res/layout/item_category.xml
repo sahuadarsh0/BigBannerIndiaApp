@@ -28,6 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category"
         tools:itemCount="2"
-        tools:listitem="@layout/item_shop_category" />
+        tools:listitem="@layout/item_shop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

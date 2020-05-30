@@ -13,13 +13,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,22 +42,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private BottomNavigationView bottomNavigationView;
 
-    private FloatingActionButton home;
     Context context;
 
     DrawerLayout drawer;
     NavigationView navigationView;
 
-    Fragment homeFrag;
-    Fragment searchFrag;
-    Fragment loginFrag = new LoginFragment(this);
-    Fragment registerFrag = new RegisterFragment(this);
-    Fragment shopsFrag;
-    //    Fragment videoSliderFrag;
-    FrameLayout video_container;
+
     KNetwork.Request knRequest;
     String version;
     ProcessDialog processDialog;
+
+    HomeActivityViewModel homeActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +61,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         context = this;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        video_container = findViewById(R.id.video_container);
-        home = findViewById(R.id.home);
+
+        FloatingActionButton home = findViewById(R.id.home);
+
 
         // Network Connection
         knRequest = KNetwork.INSTANCE.bind(this, getLifecycle())
@@ -89,72 +86,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
-                    Fragment active = null;
 
-//                    video_container.setVisibility(View.GONE);
-//                    getSupportFragmentManager().beginTransaction()
-//                            .remove(videoSliderFrag)
-//                            .commit();
+                    Log.d("asa", "onCreate: " + item.getTitle());
+
+                    drawer.openDrawer(navigationView);
 
 
-                    switch (item.getItemId()) {
-
-                        case R.id.menu:
-                            drawer.openDrawer(navigationView);
-                            break;
-
-
-                        case R.id.accounts:
-                            active = loginFrag;
-                            break;
-
-
-                        case R.id.search:
-                            active = searchFrag;
-                            break;
-
-                        case R.id.shops:
-                            active = shopsFrag;
-                            break;
-
-
-                    }
-                    if (active != null) {
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_container, active)
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                    if (item.getItemId() == R.id.invisible || item.getItemId() == R.id.home) {
-
-//                        video_container.setVisibility(View.VISIBLE);
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.video_container, videoSliderFrag)
-//                                .commit();
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_container, homeFrag)
-                                .addToBackStack(null)
-                                .commit();
-                    }
-
-                    return false;
+                    return true;
                 });
 
-        home.setOnClickListener(v -> {
-//            video_container.setVisibility(View.VISIBLE);
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.video_container, videoSliderFrag)
-//                    .commit();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_container, homeFrag)
-                    .addToBackStack(null)
-                    .commit();
 
+        home.setOnClickListener(v -> {
+            //TODO: open home fragment on click
+//            NavDirections action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment();
+//            Navigation.findNavController(view).navigate(action);
         });
 
 
@@ -162,11 +107,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         processDialog.show();
         bottomNavigationView.setVisibility(View.GONE);
 
-//
-////         Get All Slider Videos
-//        getSliderVideos();
 //         Get All Categories
         getCategories();
+
+
+        setBottomNavMenu();
 
 
 //         Check For Update
@@ -179,8 +124,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         checkUpdate();
 
+
+        homeActivityViewModel = new ViewModelProvider(this).get(HomeActivityViewModel.class);
+
     }
 
+    private void setBottomNavMenu() {
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(bottomNavigationView,
+                navHostFragment.getNavController());
+
+    }
 
     private void getCategories() {
 
@@ -190,18 +146,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 List<Category> category;
                 category = response.body();
-                homeFrag = new HomeFragment(HomeActivity.this, category);
-                shopsFrag = new ShopsFragment(HomeActivity.this, category);
-                searchFrag = new SearchFragment(HomeActivity.this, category);
+
                 bottomNavigationView.setVisibility(View.VISIBLE);
                 processDialog.dismiss();
-
-
-                getSupportFragmentManager().beginTransaction().add(R.id.main_container, homeFrag, "1").commit();
-
-//         Get All Slider Videos
-//                getSliderVideos();
-//                recycler_categories.setAdapter(new CategoryAdapter(context, category));
+                homeActivityViewModel.setCategory(category);
             }
 
             @Override
@@ -210,38 +158,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
-//    private void getSliderVideos() {
-//        Call<List<Slider>> videoSlider = HomeApi.getApiService().getSliderVideos();
-//        videoSlider.enqueue(new Callback<List<Slider>>() {
-//            @Override
-//            public void onResponse(Call<List<Slider>> call, Response<List<Slider>> response) {
-//
-//                List<Slider> video = response.body();
-//                ArrayList<String> list = new ArrayList<>();
-//                assert video != null;
-//                for (int i = 0; i < video.size(); i++) {
-//                    list.add(API.VIDEO_SLIDER_FOLDER.toString() + video.get(i).getVideo());
-//                }
-//                videoSliderFrag = new VideoSlider(context, list);
-//                showSlider();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Slider>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
-//
-//
-//    private void showSlider() {
-//        video_container.setVisibility(View.VISIBLE);
-//        fm.beginTransaction().add(R.id.main_container, homeFrag, "1").commit();
-//        fm.beginTransaction()
-//                .add(R.id.video_container, videoSliderFrag)
-//                .commit();
-//    }
 
 
     private void checkUpdate() {
@@ -305,10 +221,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.contact) {
             drawer.closeDrawer(GravityCompat.END);
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, homeFrag).commit();
 
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

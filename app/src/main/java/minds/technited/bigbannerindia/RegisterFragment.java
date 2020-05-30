@@ -15,8 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,7 +42,7 @@ import retrofit2.Response;
 public class RegisterFragment extends Fragment {
 
 
-    private Context context, c, ca;
+    private Context context;
     private String email, mobile1, state_id, district_id, city_id, locality_id, postal_code_id, password, cnf_password, name, address, gender;
     private TextInputEditText etName, etMobile1, etEmail, etAddress, etPassword, etcnf_password;
     private List<String> state_ids, district_ids, city_ids, locality_ids, postal_code_ids;
@@ -46,21 +50,19 @@ public class RegisterFragment extends Fragment {
     private ChipGroup choiceChipGroup;
 
     public RegisterFragment() {
-        // Required empty public constructor
-    }
-
-
-    RegisterFragment(Context context) {
-        this.context = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register,
-                container, false);
+        return inflater.inflate(R.layout.fragment_register, container, false);
+    }
 
-        c = getActivity().getApplicationContext();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        context = requireContext();
         state_ids = district_ids = city_ids = locality_ids = postal_code_ids = new ArrayList<>();
         state_id = district_id = city_id = locality_id = postal_code_id = new String();
         ConstraintLayout layout = view.findViewById(R.id.request_layout);
@@ -73,7 +75,7 @@ public class RegisterFragment extends Fragment {
         etPassword = view.findViewById(R.id.password);
         etcnf_password = view.findViewById(R.id.cnf_password);
 
-        Animation animation = AnimationUtils.loadAnimation(c, R.anim.slide_in_up);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_up);
         layout.startAnimation(animation);
         state_spinner = view.findViewById(R.id.state);
         district_spinner = view.findViewById(R.id.district);
@@ -85,10 +87,12 @@ public class RegisterFragment extends Fragment {
         TextView register_text = view.findViewById(R.id.register_text);
 
 
-        login_text.setOnClickListener(v -> getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_container, new LoginFragment(context))
-                .commit()
+        login_text.setOnClickListener(v ->
+                {
+                    NavDirections action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
+                    Navigation.findNavController(view).navigate(action);
+                }
+
         );
         register_text.setOnClickListener(v -> {
 
@@ -179,7 +183,6 @@ public class RegisterFragment extends Fragment {
         btnRegister.setOnClickListener(v -> customerRegistration());
 
 
-        return view;
     }
 
     private void getStateList() {
@@ -325,33 +328,33 @@ public class RegisterFragment extends Fragment {
         boolean flag = false;
 
         if (name.isEmpty()) {
-            Toast.makeText(c, "Name is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Name is empty", Toast.LENGTH_SHORT).show();
         } else if (mobile1.isEmpty()) {
-            Toast.makeText(c, "Mobile number is empty", Toast.LENGTH_SHORT).show();
-        }else if (gender.equals("")) {
-            Toast.makeText(c, "Select Gender", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Mobile number is empty", Toast.LENGTH_SHORT).show();
+        } else if (gender.equals("")) {
+            Toast.makeText(context, "Select Gender", Toast.LENGTH_SHORT).show();
         } else if (!mobile1.matches("[0-9]{10}")) {
-            Toast.makeText(c, "Mobile number is invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Mobile number is invalid", Toast.LENGTH_SHORT).show();
         } else if (email.isEmpty()) {
-            Toast.makeText(c, "Email is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Email is empty", Toast.LENGTH_SHORT).show();
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
-            Toast.makeText(c, "Invalid email id", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Invalid email id", Toast.LENGTH_SHORT).show();
         } else if (state_id.isEmpty()) {
-            Toast.makeText(c, "Select state", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Select state", Toast.LENGTH_SHORT).show();
         } else if (district_id.isEmpty()) {
-            Toast.makeText(c, "Select district", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Select district", Toast.LENGTH_SHORT).show();
         } else if (city_id.isEmpty()) {
-            Toast.makeText(c, "Select City", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Select City", Toast.LENGTH_SHORT).show();
         } else if (address.isEmpty()) {
-            Toast.makeText(c, "Address is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Address is empty", Toast.LENGTH_SHORT).show();
         } else if (postal_code_id.isEmpty()) {
-            Toast.makeText(c, "Postal Code is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Postal Code is empty", Toast.LENGTH_SHORT).show();
         } else if (password.isEmpty()) {
-            Toast.makeText(c, "Password is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Password is empty", Toast.LENGTH_SHORT).show();
         } else if (cnf_password.isEmpty()) {
-            Toast.makeText(c, "Confirm password is missing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Confirm password is missing", Toast.LENGTH_SHORT).show();
         } else if (!password.equals(cnf_password)) {
-            Toast.makeText(c, "Password did not matched", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Password did not matched", Toast.LENGTH_SHORT).show();
         } else {
             flag = true;
         }
@@ -366,13 +369,14 @@ public class RegisterFragment extends Fragment {
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
 
                     Received data = response.body();
-                    Fragment loginFrag = new LoginFragment(getActivity());
+                    NavDirections action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
 
                     if (data.getMsg().equals("Successful"))
-                        MD.alert(getActivity(), data.getMsg(), data.getDetails(), "Login", R.id.main_container, loginFrag);
+                        MD.alert(getActivity(), data.getMsg(), data.getDetails(), "Login", getView(), action);
 
                     else
                         MD.alert(context, data.getMsg(), data.getDetails());
+
 
                 }
 

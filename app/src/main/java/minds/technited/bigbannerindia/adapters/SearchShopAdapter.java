@@ -19,27 +19,27 @@ import com.bumptech.glide.Glide;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import minds.technited.asautils.MD;
 import minds.technited.asautils.SharedPrefs;
 import minds.technited.bigbannerindia.API;
-import minds.technited.bigbannerindia.HomeFragmentDirections;
 import minds.technited.bigbannerindia.R;
 import minds.technited.bigbannerindia.ShopActivity;
+import minds.technited.bigbannerindia.ShopsFragmentDirections;
 import minds.technited.bigbannerindia.models.Shop;
 
-public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapter.ShopViewHolder> {
+public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopAdapter.ShopViewHolder> {
 
+    SharedPrefs loginSharedPrefs;
     private List<Shop> shops;
     private Context context;
-    SharedPrefs loginSharedPrefs;
 
-    public ShopCategoryAdapter(Context context, List<Shop> shops) {
+    public SearchShopAdapter(Context context, List<Shop> shops) {
         this.context = context;
         this.shops = shops;
         loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
-        setHasStableIds(true);
     }
 
 
@@ -63,12 +63,23 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
         } else {
             holder.offer_layout.setVisibility(View.GONE);
         }
-
+        holder.offer_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: OFFERS FRAGMENT
+//                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+//                activity.getSupportFragmentManager()
+//                        .beginTransaction().addToBackStack(null)
+//                        .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
+//                        .commit();
+            }
+        });
 
         holder.banner.setOnClickListener(v -> {
             if (loginSharedPrefs.get("customer_id") == null) {
-                NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginFragment();
+                NavDirections action = ShopsFragmentDirections.actionShopsFragmentToLoginFragment();
                 MD.alert(v.getContext(), "Login Required", "To see shop details you have to login first", "ok", v, action);
+
             } else {
                 Intent i = new Intent(context, ShopActivity.class);
                 Bundle bundle = new Bundle();
@@ -76,15 +87,6 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
                 i.putExtras(bundle);
                 context.startActivity(i);
             }
-        });
-        holder.offer_layout.setOnClickListener(v -> {
-            //TODO: OFFERS FRAGMENT
-
-//            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//            activity.getSupportFragmentManager()
-//                    .beginTransaction().addToBackStack(null)
-//                    .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
-//                    .commit();
         });
 
         String url = API.BANNER_FOLDER.toString() + s.getBanner();
@@ -97,31 +99,27 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position;
-    }
-
-    @Override
     public int getItemCount() {
         return shops.size();
     }
 
+    public void updateList(List<Shop> newList) {
+        shops = new ArrayList<>();
+        shops.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     class ShopViewHolder extends RecyclerView.ViewHolder {
         TextView total_offer;
-        ImageView banner;
         TextView srn;
+        ImageView banner;
         LinearLayout offer_layout;
 
         ShopViewHolder(@NonNull View itemView) {
             super(itemView);
             total_offer = itemView.findViewById(R.id.total_offer);
-            banner = itemView.findViewById(R.id.banner);
             srn = itemView.findViewById(R.id.srn);
+            banner = itemView.findViewById(R.id.banner);
             offer_layout = itemView.findViewById(R.id.offer_layout);
         }
     }

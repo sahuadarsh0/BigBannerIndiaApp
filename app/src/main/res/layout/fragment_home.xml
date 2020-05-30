@@ -13,6 +13,7 @@
         android:id="@+id/video_container"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="10dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="w,16:9"
@@ -28,9 +29,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/shop_by_category"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        style="@style/TextBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_container" />
 
