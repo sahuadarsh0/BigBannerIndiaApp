@@ -46,6 +46,7 @@ public class ProductActivity extends AppCompatActivity {
     private SharedPrefs loginSharedPrefs;
     EditText comment_edit;
     Comment comment;
+    Button request_item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class ProductActivity extends AppCompatActivity {
         }
 
         like = findViewById(R.id.like);
-        Button request_item = findViewById(R.id.request_item);
+        request_item = findViewById(R.id.request_item);
         comment_edit = findViewById(R.id.comment_edit);
 
 
@@ -198,18 +199,37 @@ public class ProductActivity extends AppCompatActivity {
                 List<Product> products = response.body();
 
                 assert products != null;
-                List<Like> likes = products.get(0).getLikes();
+                Product product = products.get(0);
+
+//                request
+                if (product.getRequestStatus().equals("0")) {
+                    request_item.setVisibility(View.INVISIBLE);
+                }
+
+
+//                comment
+                if (product.getCommentStatus().equals("0")) {
+                    comment_edit.setVisibility(View.INVISIBLE);
+                    recycler_comments_container.setVisibility(View.INVISIBLE);
+                } else {
+                    recycler_comments_container.setAdapter(new CommentsAdapter(ProductActivity.this, product.getComments()));
+                }
+
+//                likes
+                List<Like> likes = product.getLikes();
                 if (likes != null) {
+                    boolean likeFlag = false;
                     for (Like oneLike : likes) {
                         if (oneLike.getCustomerId().equals(loginSharedPrefs.get("customer_id")) && oneLike.getLike().equals("1")) {
+                            likeFlag = true;
                             like.setImageResource(R.drawable.ic_like);
-                        } else {
+                        }
+                        if (!likeFlag) {
                             like.setImageResource(R.drawable.ic_white_like);
                         }
                     }
                 }
-                recycler_comments_container.setAdapter(new CommentsAdapter(ProductActivity.this, products.get(0).getComments()));
-                initToolbar(products.get(0));
+                initToolbar(product);
             }
 
             @Override

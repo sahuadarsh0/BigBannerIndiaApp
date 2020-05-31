@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -45,12 +46,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.product_name.setText(product.getName());
         holder.product_id.setText(product.getId());
 
-
-        holder.product_layout.setOnClickListener(v -> {
-            Intent i = new Intent(context, ProductActivity.class);
-            i.putExtra("product_id", holder.product_id.getText().toString());
-            context.startActivity(i);
-        });
+        if (product.getStock().equals("0"))
+            holder.product_layout.setOnClickListener(v -> {
+                Toast.makeText(context, "Product Out of Stock", Toast.LENGTH_SHORT).show();
+            });
+        else
+            holder.product_layout.setOnClickListener(v -> {
+                Intent i = new Intent(context, ProductActivity.class);
+                i.putExtra("product_id", holder.product_id.getText().toString());
+                context.startActivity(i);
+            });
 
         String url = API.PRODUCT_FOLDER.toString() + product.getImage();
         Glide

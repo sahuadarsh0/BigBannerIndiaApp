@@ -26,8 +26,8 @@ import minds.technited.asautils.MD;
 import minds.technited.asautils.SharedPrefs;
 import minds.technited.bigbannerindia.API;
 import minds.technited.bigbannerindia.R;
+import minds.technited.bigbannerindia.SearchFragmentDirections;
 import minds.technited.bigbannerindia.ShopActivity;
-import minds.technited.bigbannerindia.ShopsFragmentDirections;
 import minds.technited.bigbannerindia.models.Shop;
 
 public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopAdapter.ShopViewHolder> {
@@ -77,7 +77,7 @@ public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopAdapter.Sh
 
         holder.banner.setOnClickListener(v -> {
             if (loginSharedPrefs.get("customer_id") == null) {
-                NavDirections action = ShopsFragmentDirections.actionShopsFragmentToLoginFragment();
+                NavDirections action = SearchFragmentDirections.actionSearchFragmentToLoginFragment();
                 MD.alert(v.getContext(), "Login Required", "To see shop details you have to login first", "ok", v, action);
 
             } else {
