@@ -36,10 +36,4 @@
 
 
 
-<!--    <item-->
-<!--        android:id="@+id/voting_panel"-->
-<!--        android:icon="@drawable/ic_menu_slideshow"-->
-<!--        android:title="Vote"-->
-<!--        android:visible="false" />-->
-
 </menu>

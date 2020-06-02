@@ -13,12 +13,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -51,8 +54,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     KNetwork.Request knRequest;
     String version;
     ProcessDialog processDialog;
-
+    NavHostFragment navHostFragment;
+    NavController navController;
     HomeActivityViewModel homeActivityViewModel;
+
+    Boolean backPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,23 +89,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.getBackground().setAlpha(0);
         bottomNavigationView.setBackgroundResource(R.drawable.transparent_background);
         bottomNavigationView.setItemBackground(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return true;
+            }
+        });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                item -> {
 
-                    Log.d("asa", "onCreate: " + item.getTitle());
-
-                    drawer.openDrawer(navigationView);
-
-
-                    return true;
-                });
-
+        navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+        Navigation.setViewNavController(home, navController);
 
         home.setOnClickListener(v -> {
-            //TODO: open home fragment on click
-//            NavDirections action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment();
-//            Navigation.findNavController(view).navigate(action);
+            navController.navigate(R.id.homeFragment);
         });
 
 
@@ -129,13 +133,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, drawer);
+    }
+
     private void setBottomNavMenu() {
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView,
-                navHostFragment.getNavController());
-
+                navController);
     }
 
     private void getCategories() {
@@ -197,30 +203,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-
-        switch (id) {
-
-//            case android.R.id.home:
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
+        drawer.closeDrawer(GravityCompat.END);
 
         if (id == R.id.our_services) {
             // Handle the camera action
         } else if (id == R.id.local_jobs) {
 
         } else if (id == R.id.contact) {
-            drawer.closeDrawer(GravityCompat.END);
 
         }
         return true;
@@ -230,6 +222,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
+        } else if (navController.getGraph().getStartDestination() == navController.getCurrentDestination().getId()) {
+
+            if (backPressedOnce) {
+                super.onBackPressed();
+            }
+
+            backPressedOnce = true;
+            Toast.makeText(context, "Please Back again to exit", Toast.LENGTH_SHORT).show();
+            new Handler();
+            Handler handler;
+            handler = new Handler();
+            handler.postDelayed(() -> backPressedOnce = false, 2000);
         } else {
             super.onBackPressed();
         }
