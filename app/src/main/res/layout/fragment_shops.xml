@@ -17,6 +17,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="@string/all_shops"
+        android:fontFamily="@font/linotte_semi_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

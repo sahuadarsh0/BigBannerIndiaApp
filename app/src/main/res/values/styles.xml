@@ -9,6 +9,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/linotte_regular</item>
         <item name="android:windowBackground">@color/white</item>
     </style>
 
@@ -41,6 +42,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorDark</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/linotte_semi_bold</item>
 
     </style>
 
@@ -58,6 +60,7 @@
         <item name="backgroundTint">@color/white</item>
         <item name="strokeColor">@color/bbi</item>
         <item name="strokeWidth">2dp</item>
+        <item name="android:fontFamily">@font/linotte_semi_bold</item>
     </style>
 
 
@@ -68,6 +71,7 @@
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@color/colorLight</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/linotte_semi_bold</item>
     </style>
 
     <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
@@ -93,6 +97,7 @@
         <item name="android:textColor">@color/blue_800</item>
         <item name="strokeColor">@color/blue_800</item>
         <item name="rippleColor">@color/blue_800</item>
+        <item name="android:fontFamily">@font/linotte_semi_bold</item>
     </style>
 
     <style name="TextBlackSmall">

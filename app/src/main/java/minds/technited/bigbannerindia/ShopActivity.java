@@ -51,6 +51,7 @@ public class ShopActivity extends AppCompatActivity {
 
 
         TextView offers_text = findViewById(R.id.offers_text);
+        TextView address = findViewById(R.id.address);
         ImageView banner = findViewById(R.id.banner);
         String url = API.BANNER_FOLDER.toString() + shop.getBanner();
         Glide
@@ -58,6 +59,8 @@ public class ShopActivity extends AppCompatActivity {
                 .load(url)
                 .placeholder(R.drawable.banner)
                 .into(banner);
+
+        address.setText(shop.getAddress());
 
         collapsingToolbarLayout.setTitle(shop.getName());
         toolbar1.setTitle(shop.getName());

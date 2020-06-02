@@ -72,6 +72,7 @@
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:text="update"
+                android:fontFamily="@font/linotte_semi_bold"
                 android:typeface="monospace"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

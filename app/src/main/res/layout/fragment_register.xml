@@ -21,6 +21,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="42dp"
             android:text="@string/register"
+            android:fontFamily="@font/linotte_bold"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -33,6 +34,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="42dp"
             android:layout_marginEnd="24dp"
+            android:fontFamily="@font/linotte_bold"
             android:text="@string/login"
             android:textColor="@color/grey"
             android:textSize="22sp"

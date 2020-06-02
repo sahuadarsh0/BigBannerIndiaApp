@@ -96,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
+            android:fontFamily="@font/linotte_semi_bold"
             android:text="Offers "
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -107,8 +108,9 @@
             android:text="10" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
             android:src="@drawable/ic_diamond" />
     </LinearLayout>
 
