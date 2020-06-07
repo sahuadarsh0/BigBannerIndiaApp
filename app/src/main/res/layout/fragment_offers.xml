@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <minds.technited.asaimagelibrary.ScrollGallery
+    <technited.minds.asaimagelibrary.ScrollGallery
         android:id="@+id/scroll_gallery"
         android:layout_width="0dp"
         android:layout_height="300dp"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="minds.technited.bigbannerindia">
+    package="technited.minds.bigbannerindia">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".App"
+        android:name="technited.minds.bigbannerindia.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,13 +18,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProductActivity" />
-        <activity android:name=".ShopActivity" />
-        <activity android:name=".BusinessFriend" />
+        <activity android:name="technited.minds.bigbannerindia.ProductActivity" />
+        <activity android:name="technited.minds.bigbannerindia.ShopActivity" />
+        <activity android:name="technited.minds.bigbannerindia.BusinessFriend" />
         <activity
-            android:name=".HomeActivity"
+            android:name="technited.minds.bigbannerindia.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SplashActivity">
+        <activity android:name="technited.minds.bigbannerindia.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
