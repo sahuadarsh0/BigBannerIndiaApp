@@ -22,8 +22,8 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
-import technited.minds.asautils.MD;
-import technited.minds.asautils.SharedPrefs;
+import technited.minds.androidutils.MD;
+import technited.minds.androidutils.SharedPrefs;
 import technited.minds.bigbannerindia.API;
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.SearchFragmentDirections;

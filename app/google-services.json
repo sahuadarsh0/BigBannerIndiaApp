@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1060309650696:android:7122da819ddf880a06b0bd",
+        "mobilesdk_app_id": "1:1060309650696:android:da21f10ec57cb19206b0bd",
         "android_client_info": {
-          "package_name": "minds.technited.bigbannerindia"
+          "package_name": "technited.minds.bigbannerindia"
         }
       },
       "oauth_client": [

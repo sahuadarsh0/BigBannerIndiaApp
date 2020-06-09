@@ -37,7 +37,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import technited.minds.asautils.ProcessDialog;
+import technited.minds.androidutils.ProcessDialog;
 import technited.minds.bigbannerindia.models.Category;
 import technited.minds.bigbannerindia.models.Received;
 

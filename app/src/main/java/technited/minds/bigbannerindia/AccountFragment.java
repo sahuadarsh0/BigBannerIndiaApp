@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import technited.minds.asautils.SharedPrefs;
+import technited.minds.androidutils.SharedPrefs;
 
 
 public class AccountFragment extends Fragment {

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.rezwan.knetworklib.KNetwork;
 
-import technited.minds.asautils.MD;
+import technited.minds.androidutils.MD;
 
 
 public class SplashActivity extends AppCompatActivity implements KNetwork.OnNetWorkConnectivityListener {
