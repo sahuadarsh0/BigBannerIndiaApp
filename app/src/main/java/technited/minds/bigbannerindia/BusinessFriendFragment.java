@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,28 +32,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import technited.minds.androidutils.MD;
-import technited.minds.bigbannerindia.models.Customer;
+import technited.minds.bigbannerindia.models.BusinessFriendModel;
 import technited.minds.bigbannerindia.models.Masters;
 import technited.minds.bigbannerindia.models.Received;
 
 
-public class RegisterFragment extends Fragment {
+public class BusinessFriendFragment extends Fragment {
 
 
     private Context context;
-    private String email, mobile1, state_id, district_id, city_id, locality_id, postal_code_id, password, cnf_password, name, address, gender;
-    private TextInputEditText etName, etMobile1, etEmail, etAddress, etPassword, etcnf_password;
+    private String email, mobile1, state_id, district_id, city_id, locality_id, postal_code_id, name, address, gender, father_name, dob, nationality, qualification, marital_status;
+    private TextInputEditText etName, etFatherName, etDob, etNationality, etQualification, etMaritalStatus, etMobile1, etEmail, etAddress;
     private List<String> state_ids, district_ids, city_ids, locality_ids, postal_code_ids;
     private Spinner state_spinner, district_spinner, city_spinner, locality_spinner, postal_code_spinner;
     private ChipGroup choiceChipGroup;
 
-    public RegisterFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        return inflater.inflate(R.layout.fragment_business_friend, container, false);
     }
 
     @Override
@@ -72,8 +68,11 @@ public class RegisterFragment extends Fragment {
         etMobile1 = view.findViewById(R.id.mobile1);
         etEmail = view.findViewById(R.id.email);
         etAddress = view.findViewById(R.id.address);
-        etPassword = view.findViewById(R.id.password);
-        etcnf_password = view.findViewById(R.id.cnf_password);
+        etFatherName = view.findViewById(R.id.father_name);
+        etDob = view.findViewById(R.id.dob);
+        etNationality = view.findViewById(R.id.nationality);
+        etQualification = view.findViewById(R.id.qualification);
+        etMaritalStatus = view.findViewById(R.id.marital_status);
 
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_up);
         layout.startAnimation(animation);
@@ -83,20 +82,6 @@ public class RegisterFragment extends Fragment {
         locality_spinner = view.findViewById(R.id.locality);
         postal_code_spinner = view.findViewById(R.id.postalcode);
 
-        TextView login_text = view.findViewById(R.id.login_text);
-        TextView register_text = view.findViewById(R.id.register_text);
-
-
-        login_text.setOnClickListener(v ->
-                {
-                    NavDirections action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
-                    Navigation.findNavController(view).navigate(action);
-                }
-
-        );
-        register_text.setOnClickListener(v -> {
-
-        });
 
         gender = "";
         choiceChipGroup = view.findViewById(R.id.gender);
@@ -180,7 +165,7 @@ public class RegisterFragment extends Fragment {
             });
         }
 
-        btnRegister.setOnClickListener(v -> customerRegistration());
+        btnRegister.setOnClickListener(v -> businessFriendRegistration());
 
 
     }
@@ -316,13 +301,18 @@ public class RegisterFragment extends Fragment {
         return ids;
     }
 
-    private void customerRegistration() {
+    private void businessFriendRegistration() {
 
         name = etName.getText().toString();
         mobile1 = etMobile1.getText().toString();
         email = etEmail.getText().toString();
-        password = etPassword.getText().toString();
-        cnf_password = etcnf_password.getText().toString();
+
+        father_name = etFatherName.getText().toString();
+        dob = etDob.getText().toString();
+        nationality = etNationality.getText().toString();
+        qualification = etQualification.getText().toString();
+        marital_status = etMaritalStatus.getText().toString();
+
         address = etAddress.getText().toString();
 
         boolean flag = false;
@@ -331,6 +321,16 @@ public class RegisterFragment extends Fragment {
             Toast.makeText(context, "Name is empty", Toast.LENGTH_SHORT).show();
         } else if (mobile1.isEmpty()) {
             Toast.makeText(context, "Mobile number is empty", Toast.LENGTH_SHORT).show();
+        } else if (father_name.isEmpty()) {
+            Toast.makeText(context, "Father's Name is empty", Toast.LENGTH_SHORT).show();
+        } else if (dob.isEmpty()) {
+            Toast.makeText(context, "DOB is empty", Toast.LENGTH_SHORT).show();
+        } else if (nationality.isEmpty()) {
+            Toast.makeText(context, "Nationality is empty", Toast.LENGTH_SHORT).show();
+        } else if (qualification.isEmpty()) {
+            Toast.makeText(context, "Qualification is empty", Toast.LENGTH_SHORT).show();
+        } else if (marital_status.isEmpty()) {
+            Toast.makeText(context, "Marital Status is empty", Toast.LENGTH_SHORT).show();
         } else if (gender.equals("")) {
             Toast.makeText(context, "Select Gender", Toast.LENGTH_SHORT).show();
         } else if (!mobile1.matches("[0-9]{10}")) {
@@ -349,34 +349,23 @@ public class RegisterFragment extends Fragment {
             Toast.makeText(context, "Address is empty", Toast.LENGTH_SHORT).show();
         } else if (postal_code_id.isEmpty()) {
             Toast.makeText(context, "Postal Code is empty", Toast.LENGTH_SHORT).show();
-        } else if (password.isEmpty()) {
-            Toast.makeText(context, "Password is empty", Toast.LENGTH_SHORT).show();
-        } else if (cnf_password.isEmpty()) {
-            Toast.makeText(context, "Confirm password is missing", Toast.LENGTH_SHORT).show();
-        } else if (!password.equals(cnf_password)) {
-            Toast.makeText(context, "Password did not matched", Toast.LENGTH_SHORT).show();
         } else {
             flag = true;
         }
 
         if (flag) {
 
-            Customer customer = new Customer("", name, gender, state_id, district_id, city_id, locality_id, postal_code_id, mobile1, address, email, password);
+            BusinessFriendModel friend = new BusinessFriendModel("", name, gender, state_id, district_id, city_id, locality_id, postal_code_id, mobile1, address, email, father_name, dob, nationality, qualification, marital_status);
 
-            Call<Received> createCustomerCall = AccountsApi.getApiService().registerCustomer(customer);
-            createCustomerCall.enqueue(new Callback<Received>() {
+            Call<Received> createFriendCall = AccountsApi.getApiService().registerBusinessFriend(friend);
+            createFriendCall.enqueue(new Callback<Received>() {
                 @Override
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
 
                     Received data = response.body();
-                    NavDirections action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
 
-                    if (data.getMsg().equals("Successful"))
-                        MD.alert(getActivity(), data.getMsg(), data.getDetails(), "Login", getView(), action);
-
-                    else
-                        MD.alert(context, data.getMsg(), data.getDetails());
-
+                    NavDirections action = BusinessFriendFragmentDirections.actionBusinessFriendFragmentToHomeFragment();
+                    MD.alert(getActivity(), data.getMsg(), data.getDetails(), "ok", getView(), action);
 
                 }
 
@@ -384,6 +373,7 @@ public class RegisterFragment extends Fragment {
                 public void onFailure(@NotNull Call<Received> call, @NotNull Throwable t) {
                     Log.e("ASA", "onFailure: " + t.getMessage(), t);
                 }
+
             });
 
         }

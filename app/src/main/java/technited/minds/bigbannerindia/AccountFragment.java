@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ public class AccountFragment extends Fragment {
     public AccountFragment() {
     }
 
+    TextView likes, requests;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class AccountFragment extends Fragment {
                     Navigation.findNavController(view).navigate(action);
                 }
         );
+
+        likes = view.findViewById(R.id.likes);
+        requests = view.findViewById(R.id.requests);
 
     }
 }

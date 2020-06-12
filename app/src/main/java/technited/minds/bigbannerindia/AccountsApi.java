@@ -16,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import technited.minds.bigbannerindia.models.BusinessFriendModel;
 import technited.minds.bigbannerindia.models.Customer;
 import technited.minds.bigbannerindia.models.Masters;
 import technited.minds.bigbannerindia.models.Received;
@@ -70,6 +71,10 @@ class AccountsApi {
         @POST("customer_register")
         Call<Received> registerCustomer(@Body Customer customer);
 
+
+        @Headers("Content-Type: application/json")
+        @POST("business_friend_register")
+        Call<Received> registerBusinessFriend(@Body BusinessFriendModel friend);
 
 
         @FormUrlEncoded

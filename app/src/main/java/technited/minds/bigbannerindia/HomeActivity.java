@@ -92,14 +92,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return true;
+                switch (item.getItemId()) {
+
+                    case R.id.menu:
+                        drawer.openDrawer(navigationView);
+                        break;
+
+
+                    case R.id.loginFragment:
+                        navController.navigate(R.id.loginFragment);
+                        break;
+
+
+                    case R.id.searchFragment:
+                        navController.navigate(R.id.searchFragment);
+                        break;
+
+                    case R.id.shopsFragment:
+                        navController.navigate(R.id.shopsFragment);
+                        break;
+
+                    case R.id.invisible:
+                        navController.navigate(R.id.homeFragment);
+                        break;
+
+
+                }
+                return false;
             }
         });
 
-
-        navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment);
-        navController = navHostFragment.getNavController();
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         Navigation.setViewNavController(home, navController);
 
         home.setOnClickListener(v -> {
@@ -115,7 +138,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getCategories();
 
 
-        setBottomNavMenu();
+//        setBottomNavMenu();
 
 
 //         Check For Update
@@ -211,6 +234,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.our_services) {
             // Handle the camera action
         } else if (id == R.id.local_jobs) {
+
+        } else if (id == R.id.business_friend) {
+            navController.navigate(R.id.businessFriendFragment);
 
         } else if (id == R.id.contact) {
 

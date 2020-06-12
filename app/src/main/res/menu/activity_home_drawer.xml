@@ -29,7 +29,7 @@
             android:title="Contact Us" />
 
         <item
-            android:id="@+id/b_friend"
+            android:id="@+id/business_friend"
             android:icon="@drawable/ic_operator"
             android:title="Business Friend" />
 
