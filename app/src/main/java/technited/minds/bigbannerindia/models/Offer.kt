@@ -1,9 +1,10 @@
 package technited.minds.bigbannerindia.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import org.parceler.Parcel
+import kotlinx.android.parcel.Parcelize
 
-@Parcel
+@Parcelize
 data class Offer(
         val image: String? = null,
         val cdt: String? = null,
@@ -13,4 +14,4 @@ data class Offer(
 
         @field:SerializedName("client_id")
         val clientId: String? = null
-)
+) : Parcelable

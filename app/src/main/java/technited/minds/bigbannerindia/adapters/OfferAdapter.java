@@ -50,7 +50,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.getSupportFragmentManager()
                     .beginTransaction().addToBackStack(null)
-                    .replace(R.id.shop_container, new OffersFragment(context, offers, position))
+                    .replace(R.id.shop_container, new OffersFragment(offers, position))
                     .commit();
         });
 

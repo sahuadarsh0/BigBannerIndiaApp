@@ -1,20 +1,18 @@
 package technited.minds.bigbannerindia;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.Arrays;
 import java.util.List;
 
 import technited.minds.asaimagelibrary.GallerySettings;
@@ -26,7 +24,6 @@ import technited.minds.bigbannerindia.models.Offer;
 
 public class OffersFragment extends Fragment {
 
-    private Context context, c;
 
     private ScrollGallery scrollGallery;
     private int position;
@@ -34,12 +31,10 @@ public class OffersFragment extends Fragment {
     private TextView offer_name;
 
     public OffersFragment() {
-        // Required empty public constructor
     }
 
 
-    public OffersFragment(Context context, List<Offer> offers, int position) {
-        this.context = context;
+    public OffersFragment(List<Offer> offers, int position) {
         this.position = position;
         this.offers = offers;
     }
@@ -50,49 +45,36 @@ public class OffersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_offers,
                 container, false);
 
-        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
         offer_name = view.findViewById(R.id.offer_name);
         scrollGallery = ScrollGallery
                 .from(view.findViewById(R.id.scroll_gallery))
                 .settings(
                         GallerySettings
-                                .from(activity.getSupportFragmentManager())
+                                .from(requireActivity().getSupportFragmentManager())
                                 .enableZoom(true)
                                 .build()
                 )
                 .onImageClickListener(position -> {
-//                        Toast.makeText(GridViewItems.this, "image position = " + position, Toast.LENGTH_SHORT).show();
+
                 })
                 .onPageChangeListener(new CustomOnPageListener())
                 .build();
+        if (offers == null)
+            offers = Arrays.asList(OffersFragmentArgs.fromBundle(getArguments()).getListOffer());
 
-        if (offers != null) {
-            String folder = API.OFFER_FOLDER.toString();
+        String folder = API.OFFER_FOLDER.toString();
 
-            for (Offer offer : offers) {
+        for (Offer offer : offers) {
 
-                scrollGallery.addMedia(MediaInfo.mediaLoader(
-                        new GlideImageLoader(folder + offer.getImage()))
-                );
-            }
+            scrollGallery.addMedia(MediaInfo.mediaLoader(
+                    new GlideImageLoader(folder + offer.getImage()))
+            );
         }
-        scrollGallery.setCurrentItem(position);
         offer_name.setText(offers.get(position).getName());
-
+        scrollGallery.setCurrentItem(position);
 
         return view;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-//                onBackPressed();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private class CustomOnPageListener extends ViewPager.SimpleOnPageChangeListener {

@@ -57,7 +57,11 @@
         android:id="@+id/offersFragment"
         android:name="technited.minds.bigbannerindia.OffersFragment"
         android:label="fragment_offers"
-        tools:layout="@layout/fragment_offers" />
+        tools:layout="@layout/fragment_offers">
+        <argument
+            android:name="listOffer"
+            app:argType="technited.minds.bigbannerindia.models.Offer[]" />
+    </fragment>
     <fragment
         android:id="@+id/shopsFragment"
         android:name="technited.minds.bigbannerindia.ShopsFragment"

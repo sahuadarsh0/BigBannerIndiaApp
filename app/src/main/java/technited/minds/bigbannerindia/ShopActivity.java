@@ -60,7 +60,11 @@ public class ShopActivity extends AppCompatActivity {
                 .placeholder(R.drawable.banner)
                 .into(banner);
 
-        address.setText(shop.getAddress());
+        String add = shop.getAddress().concat(", ").concat(shop.getLocality())
+                .concat(", ").concat(shop.getCity())
+                .concat(", ").concat(shop.getState());
+
+        address.setText(add);
 
         collapsingToolbarLayout.setTitle(shop.getName());
         toolbar1.setTitle(shop.getName());
