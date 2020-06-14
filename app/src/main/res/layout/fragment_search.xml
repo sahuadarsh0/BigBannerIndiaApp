@@ -8,48 +8,71 @@
     android:fitsSystemWindows="true"
     tools:context=".SearchFragment">
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@+id/search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search" />
-
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/bg_edit_text"
-        android:fontFamily="@font/linotte_semi_bold"
-        android:elevation="5dp"
-        android:gravity="start"
-        android:hint="Search Shops"
-        android:inputType="text"
-        android:imeOptions="actionSearch"
-        android:padding="8dp"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shrine_toolbar_collapsed_height"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/ic_search"
+                    app:layout_constraintBottom_toBottomOf="@+id/search"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/search" />
+
+                <EditText
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_edit_text"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/linotte_semi_bold"
+                    android:gravity="start"
+                    android:hint="Search Shops"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_all_shops"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
         android:clipToPadding="false"
         android:paddingTop="20dp"
         android:paddingBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:itemCount="5"
         tools:listitem="@layout/item_shop" />
 

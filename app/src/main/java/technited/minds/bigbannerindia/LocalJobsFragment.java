@@ -18,7 +18,7 @@ public class LocalJobsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_offers,
+        View view = inflater.inflate(R.layout.fragment_local_jobs,
                 container, false);
 
 

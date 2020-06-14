@@ -8,18 +8,34 @@
     android:fitsSystemWindows="true"
     tools:context=".ShopsFragment">
 
-
-    <TextView
-        style="@style/TextBlack"
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/all_shops"
-        android:fontFamily="@font/linotte_semi_bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shrine_toolbar_collapsed_height">
+
+
+            <TextView
+                style="@style/TextBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/linotte_semi_bold"
+                android:text="@string/all_shops"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_all_shops"
@@ -28,7 +44,6 @@
         android:layout_marginBottom="40dp"
         android:clipToPadding="false"
         android:paddingTop="30dp"
-        android:layout_marginTop="8dp"
         android:paddingBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
