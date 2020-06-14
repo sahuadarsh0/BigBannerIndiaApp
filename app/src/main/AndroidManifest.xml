@@ -18,12 +18,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="ProductActivity" />
-        <activity android:name="ShopActivity" />
+        <activity android:name=".ContactUs"></activity>
+        <activity android:name=".ProductActivity" />
+        <activity android:name=".ShopActivity" />
         <activity
-            android:name="HomeActivity"
+            android:name=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="SplashActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -80,11 +81,17 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
         holder.offer_layout.setOnClickListener(v -> {
             //TODO: OFFERS FRAGMENT
 
+
+            NavDirections action = HomeFragmentDirections.actionHomeFragmentToOffersFragment();
+            Navigation.findNavController(v).navigate(action);
+
 //            AppCompatActivity activity = (AppCompatActivity) v.getContext();
 //            activity.getSupportFragmentManager()
 //                    .beginTransaction().addToBackStack(null)
 //                    .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
 //                    .commit();
+
+
         });
 
         String url = API.BANNER_FOLDER.toString() + s.getBanner();

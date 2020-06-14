@@ -113,7 +113,7 @@ public class LoginFragment extends Fragment {
                     if (data.getMsg().equals("Successful")) {
                         Customer loggedCustomer = data.getCustomer();
 
-                        NavDirections action = LoginFragmentDirections.actionLoginFragmentToAccountFragment();
+                        NavDirections action = LoginFragmentDirections.actionLoginFragmentToHomeFragment();
                         MD.alert(getActivity(), data.getMsg(), data.getDetails(), "ok", getView(), action);
 
                         assert loggedCustomer != null;
@@ -132,7 +132,6 @@ public class LoginFragment extends Fragment {
 
                     } else
                         MD.alert(context, data.getMsg(), data.getDetails());
-
                 }
 
                 @Override
@@ -144,5 +143,6 @@ public class LoginFragment extends Fragment {
         }
 
     }
+
 
 }

@@ -18,6 +18,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import technited.minds.bigbannerindia.models.Category;
 import technited.minds.bigbannerindia.models.Comment;
+import technited.minds.bigbannerindia.models.LocalJob;
 import technited.minds.bigbannerindia.models.Product;
 import technited.minds.bigbannerindia.models.Received;
 import technited.minds.bigbannerindia.models.Slider;
@@ -84,6 +85,9 @@ class HomeApi {
         @POST("commentOnProduct")
         Call<Received> commentOnProduct(@Body Comment comment);
 
+
+        @GET("categories/")
+        Call<List<LocalJob>> getLocalJobs();
 
     }
 

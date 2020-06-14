@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLight"
-    android:fitsSystemWindows="true"
     tools:context=".AccountFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -133,7 +132,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/materialCardView"
         app:layout_constraintVertical_bias="1.0" />
 

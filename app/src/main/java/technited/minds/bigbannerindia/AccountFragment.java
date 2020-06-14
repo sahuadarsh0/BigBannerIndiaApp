@@ -12,23 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import technited.minds.androidutils.SharedPrefs;
 
 
 public class AccountFragment extends Fragment {
 
-    public AccountFragment() {
-    }
 
     TextView likes, requests;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_account,
+        View view = inflater.inflate(R.layout.fragment_account,
                 container, false);
+
+
+        return view;
     }
 
     @Override
@@ -42,8 +40,8 @@ public class AccountFragment extends Fragment {
         btnLogOut.setOnClickListener(v -> {
 
                     loginSharedPrefs.clearAll();
-                    NavDirections action = AccountFragmentDirections.actionAccountFragmentToHomeFragment();
-                    Navigation.findNavController(view).navigate(action);
+//                    NavDirections action = AccountFragmentDirections.actionAccountFragmentToHomeFragment();
+//                    Navigation.findNavController(view).navigate(action);
                 }
         );
 
@@ -51,4 +49,5 @@ public class AccountFragment extends Fragment {
         requests = view.findViewById(R.id.requests);
 
     }
+
 }

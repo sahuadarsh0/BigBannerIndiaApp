@@ -22,7 +22,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -54,7 +53,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     KNetwork.Request knRequest;
     String version;
     ProcessDialog processDialog;
-    NavHostFragment navHostFragment;
     NavController navController;
     HomeActivityViewModel homeActivityViewModel;
 
@@ -112,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         navController.navigate(R.id.shopsFragment);
                         break;
 
-                    case R.id.invisible:
+                    case R.id.homeFragment:
                         navController.navigate(R.id.homeFragment);
                         break;
 
@@ -240,6 +238,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.contact) {
 
+            Intent i = new Intent(this, ContactUs.class);
+            startActivity(i);
         }
         return true;
     }
@@ -252,6 +252,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             if (backPressedOnce) {
                 super.onBackPressed();
+                finish();
             }
 
             backPressedOnce = true;
