@@ -86,7 +86,7 @@ class HomeApi {
         Call<Received> commentOnProduct(@Body Comment comment);
 
 
-        @GET("categories/")
+        @GET("getLocalJobs/")
         Call<List<LocalJob>> getLocalJobs();
 
     }

@@ -16,8 +16,8 @@ data class LocalJob(
         @field:SerializedName("salary")
         val salary: String? = null,
 
-        @field:SerializedName("client_id")
-        val clientId: String? = null,
+        @field:SerializedName("id")
+        val id: String? = null,
 
         @field:SerializedName("status")
         val status: String? = null

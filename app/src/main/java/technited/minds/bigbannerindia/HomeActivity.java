@@ -232,6 +232,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.our_services) {
             // Handle the camera action
         } else if (id == R.id.local_jobs) {
+            navController.navigate(R.id.localJobsFragment);
 
         } else if (id == R.id.business_friend) {
             navController.navigate(R.id.businessFriendFragment);

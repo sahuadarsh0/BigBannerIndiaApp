@@ -25,7 +25,6 @@ import java.util.List;
 import technited.minds.androidutils.MD;
 import technited.minds.androidutils.SharedPrefs;
 import technited.minds.bigbannerindia.API;
-import technited.minds.bigbannerindia.HomeFragmentDirections;
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.ShopActivity;
 import technited.minds.bigbannerindia.ShopsFragmentDirections;
@@ -69,7 +68,7 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
             @Override
             public void onClick(View v) {
                 Offer[] o = s.getOffer().toArray(new Offer[]{});
-                NavDirections action = HomeFragmentDirections.actionHomeFragmentToOffersFragment(o);
+                NavDirections action = ShopsFragmentDirections.actionShopsFragmentToOffersFragment(o);
                 Navigation.findNavController(v).navigate(action);
 
             }
