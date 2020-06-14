@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,9 +25,11 @@ import java.util.List;
 import technited.minds.androidutils.MD;
 import technited.minds.androidutils.SharedPrefs;
 import technited.minds.bigbannerindia.API;
+import technited.minds.bigbannerindia.HomeFragmentDirections;
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.ShopActivity;
 import technited.minds.bigbannerindia.ShopsFragmentDirections;
+import technited.minds.bigbannerindia.models.Offer;
 import technited.minds.bigbannerindia.models.Shop;
 
 public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopViewHolder> {
@@ -65,12 +68,10 @@ public class AllShopAdapter extends RecyclerView.Adapter<AllShopAdapter.ShopView
         holder.offer_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: OFFERS FRAGMENT
-//                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//                activity.getSupportFragmentManager()
-//                        .beginTransaction().addToBackStack(null)
-//                        .replace(R.id.main_container, new OffersFragment(context, s.getOffer(), 0))
-//                        .commit();
+                Offer[] o = s.getOffer().toArray(new Offer[]{});
+                NavDirections action = HomeFragmentDirections.actionHomeFragmentToOffersFragment(o);
+                Navigation.findNavController(v).navigate(action);
+
             }
         });
 

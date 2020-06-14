@@ -80,7 +80,6 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
             }
         });
         holder.offer_layout.setOnClickListener(v -> {
-            //TODO: OFFERS FRAGMENT
             Offer[] o = s.getOffer().toArray(new Offer[]{});
             NavDirections action = HomeFragmentDirections.actionHomeFragmentToOffersFragment(o);
             Navigation.findNavController(v).navigate(action);
