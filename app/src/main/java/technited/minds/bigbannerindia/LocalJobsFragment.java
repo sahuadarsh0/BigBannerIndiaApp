@@ -17,28 +17,29 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import technited.minds.androidutils.ProcessDialog;
 import technited.minds.bigbannerindia.adapters.LocalJobAdapter;
 import technited.minds.bigbannerindia.models.LocalJob;
 
 
 public class LocalJobsFragment extends Fragment {
+    ProcessDialog processDialog;
 
     public LocalJobsFragment() {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_local_jobs,
+
+        return inflater.inflate(R.layout.fragment_local_jobs,
                 container, false);
-
-
-        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        processDialog = new ProcessDialog(requireContext());
+        processDialog.show();
 
         RecyclerView recycler_local_jobs = view.findViewById(R.id.recycler_local_jobs);
         recycler_local_jobs.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -50,12 +51,12 @@ public class LocalJobsFragment extends Fragment {
                 List<LocalJob> localJobs;
                 localJobs = response.body();
                 recycler_local_jobs.setAdapter(new LocalJobAdapter(getContext(), localJobs));
-
+                processDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<LocalJob>> call, Throwable t) {
-
+                processDialog.dismiss();
             }
         });
     }

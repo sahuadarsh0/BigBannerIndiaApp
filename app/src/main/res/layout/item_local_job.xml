@@ -10,6 +10,7 @@
     android:layout_marginBottom="4dp"
     android:clickable="true"
     android:focusable="true"
+    app:cardCornerRadius="10dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardElevation="5dp"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -21,12 +22,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp">
+        android:padding="18dp">
 
 
         <TextView
             android:id="@+id/job_type_text"
-            style="@style/TextBlack"
+            style="@style/TextBlackMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Type"
@@ -35,7 +36,7 @@
 
         <TextView
             android:id="@+id/job_type"
-            style="@style/TextBlack"
+            style="@style/TextBlackSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -47,7 +48,7 @@
 
         <TextView
             android:id="@+id/job_salary_text"
-            style="@style/TextBlack"
+            style="@style/TextBlackMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -57,7 +58,7 @@
 
         <TextView
             android:id="@+id/job_salary"
-            style="@style/TextBlack"
+            style="@style/TextBlackSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Rs. 3000"
@@ -68,7 +69,7 @@
 
         <TextView
             android:id="@+id/job_description_text"
-            style="@style/TextBlack"
+            style="@style/TextBlackMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -78,7 +79,7 @@
 
         <TextView
             android:id="@+id/job_description"
-            style="@style/TextBlack"
+            style="@style/TextBlackSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="this is vwey good job worjker of my age id acceptable"
@@ -89,7 +90,7 @@
 
         <TextView
             android:id="@+id/job_id_text"
-            style="@style/TextBlack"
+            style="@style/TextBlackMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -99,7 +100,7 @@
 
         <TextView
             android:id="@+id/job_id"
-            style="@style/TextBlack"
+            style="@style/TextBlackSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="BBI1442"

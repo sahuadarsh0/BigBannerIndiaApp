@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.models.LocalJob;
@@ -43,15 +45,29 @@ public class LocalJobAdapter extends RecyclerView.Adapter<LocalJobAdapter.Catego
         holder.type.setText(localJob.getType());
         holder.salary.setText("Rs. " + localJob.getSalary());
         holder.description.setText(localJob.getDescription());
-        holder.job_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.job_layout.setOnClickListener(v -> {
 
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+919131869705"));
-                context.startActivity(intent);
-            }
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:+919131869705"));
+            context.startActivity(intent);
         });
+
+
+        List<Integer> list = new ArrayList<>();
+        list.add(R.color.quantum_deeporangeA100);
+        list.add(R.color.quantum_yellowA100);
+        list.add(R.color.quantum_vanillablueA100);
+        list.add(R.color.quantum_vanillaredA100);
+        list.add(R.color.quantum_tealA100);
+        list.add(R.color.quantum_limeA100);
+        list.add(R.color.quantum_lightblueA100);
+
+        holder.job_layout.setCardBackgroundColor(context.getResources().getColor(getRandomElement(list)));
+    }
+
+    public int getRandomElement(List<Integer> list) {
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
     }
 
     @Override
