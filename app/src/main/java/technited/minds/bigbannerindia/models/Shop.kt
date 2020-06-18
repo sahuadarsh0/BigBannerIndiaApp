@@ -18,6 +18,7 @@ data class Shop(
         val locality: String? = null,
         val gst: String? = null,
         val banner: String? = null,
+        val about: String? = null,
         val srn: String? = null,
         val offer: List<Offer?>? = null,
 

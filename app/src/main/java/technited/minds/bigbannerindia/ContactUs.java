@@ -10,14 +10,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ContactUs extends AppCompatActivity {
+    TextView call, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
 
-        TextView call = findViewById(R.id.contact_us);
-        TextView email = findViewById(R.id.email);
+
+        call = findViewById(R.id.contact_us);
+        email = findViewById(R.id.email);
+
+        Intent i = getIntent();
+
+        email.setText(i.getStringExtra("email"));
+        call.setText(i.getStringExtra("mobile"));
 
 
         call.setOnClickListener(new View.OnClickListener() {
@@ -25,7 +32,7 @@ public class ContactUs extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+919131869705"));
+                intent.setData(Uri.parse("tel:" + call.getText().toString()));
                 startActivity(intent);
             }
         });
@@ -34,7 +41,6 @@ public class ContactUs extends AppCompatActivity {
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 sendEmail();
             }
         });
@@ -44,8 +50,8 @@ public class ContactUs extends AppCompatActivity {
 
     void sendEmail() {
 
-        String[] TO = {"info.bigbannerindia@gmail.com"};
-        String[] NUM = {"9131869705"};
+        String[] TO = {email.getText().toString()};
+        String[] NUM = {call.getText().toString()};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);

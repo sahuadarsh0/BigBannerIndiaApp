@@ -16,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import technited.minds.bigbannerindia.models.Account;
 import technited.minds.bigbannerindia.models.BusinessFriendModel;
 import technited.minds.bigbannerindia.models.Customer;
 import technited.minds.bigbannerindia.models.Masters;
@@ -82,6 +83,12 @@ class AccountsApi {
         Call<Received> loginCustomer(
                 @Field("mobile") String mobile,
                 @Field("password") String password
+        );
+
+        @FormUrlEncoded
+        @POST("account")
+        Call<Account> account(
+                @Field("mobile") String mobile
         );
 
     }

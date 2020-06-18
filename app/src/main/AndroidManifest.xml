@@ -18,13 +18,25 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ContactUs"></activity>
-        <activity android:name=".ProductActivity" />
-        <activity android:name=".ShopActivity" />
+        <activity
+            android:name=".ContactUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutApp"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShopActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

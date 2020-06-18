@@ -34,6 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import technited.minds.androidutils.MD;
+import technited.minds.androidutils.ProcessDialog;
 import technited.minds.bigbannerindia.models.Customer;
 import technited.minds.bigbannerindia.models.Masters;
 import technited.minds.bigbannerindia.models.Received;
@@ -49,6 +50,7 @@ public class RegisterFragment extends Fragment {
     private Spinner state_spinner, district_spinner, city_spinner, locality_spinner, postal_code_spinner;
     private ChipGroup choiceChipGroup;
 
+    ProcessDialog processDialog;
     public RegisterFragment() {
     }
 
@@ -62,6 +64,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        processDialog = new ProcessDialog(context);
         context = requireContext();
         state_ids = district_ids = city_ids = locality_ids = postal_code_ids = new ArrayList<>();
         state_id = district_id = city_id = locality_id = postal_code_id = new String();
@@ -360,13 +363,14 @@ public class RegisterFragment extends Fragment {
         }
 
         if (flag) {
-
+            processDialog.show();
             Customer customer = new Customer("", name, gender, state_id, district_id, city_id, locality_id, postal_code_id, mobile1, address, email, password);
 
             Call<Received> createCustomerCall = AccountsApi.getApiService().registerCustomer(customer);
             createCustomerCall.enqueue(new Callback<Received>() {
                 @Override
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
+                    processDialog.dismiss();
 
                     Received data = response.body();
                     NavDirections action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
@@ -383,6 +387,8 @@ public class RegisterFragment extends Fragment {
                 @Override
                 public void onFailure(@NotNull Call<Received> call, @NotNull Throwable t) {
                     Log.e("ASA", "onFailure: " + t.getMessage(), t);
+                    processDialog.dismiss();
+
                 }
             });
 

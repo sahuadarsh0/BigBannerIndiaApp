@@ -1,6 +1,7 @@
 package technited.minds.androidutils
 
 import android.content.Context
+import android.text.Spanned
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -20,6 +21,18 @@ object MD {
 
     @JvmStatic
     fun alert(context: Context, title: String?, message: String?, button: String?) {
+        MaterialDialog(context).show {
+            title(text = title)
+            message(text = message)
+            positiveButton(text = button) {
+                cancel()
+            }
+
+        }.cancelOnTouchOutside(true).autoDismissEnabled
+    }
+
+    @JvmStatic
+    fun alert(context: Context, title: String?, message: Spanned?, button: String?) {
         MaterialDialog(context).show {
             title(text = title)
             message(text = message)

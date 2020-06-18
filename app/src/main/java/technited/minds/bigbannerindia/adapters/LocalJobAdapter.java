@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -65,7 +67,7 @@ public class LocalJobAdapter extends RecyclerView.Adapter<LocalJobAdapter.Catego
         holder.job_layout.setCardBackgroundColor(context.getResources().getColor(getRandomElement(list)));
     }
 
-    public int getRandomElement(List<Integer> list) {
+    public int getRandomElement(@NotNull List<Integer> list) {
         Random rand = new Random();
         return list.get(rand.nextInt(list.size()));
     }

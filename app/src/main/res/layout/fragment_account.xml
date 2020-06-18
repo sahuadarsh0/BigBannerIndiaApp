@@ -112,11 +112,12 @@
         app:layout_constraintTop_toTopOf="@+id/materialCardView">
 
         <ImageView
+            android:id="@+id/gender"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:elevation="10dp"
-            android:src="@drawable/ic_girl" />
+            android:src="@drawable/ic_boy" />
     </androidx.cardview.widget.CardView>
 
     <Button

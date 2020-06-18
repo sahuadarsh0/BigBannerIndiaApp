@@ -37,6 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import technited.minds.androidutils.ProcessDialog;
+import technited.minds.bigbannerindia.models.AboutTheApp;
 import technited.minds.bigbannerindia.models.Category;
 import technited.minds.bigbannerindia.models.Received;
 
@@ -148,7 +149,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         checkUpdate();
-
+        getAbout();
 
         homeActivityViewModel = new ViewModelProvider(this).get(HomeActivityViewModel.class);
 
@@ -223,6 +224,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    private void getAbout() {
+
+        Call<AboutTheApp> aboutAppCall = HomeApi.getApiService().getAboutApp();
+        aboutAppCall.enqueue(new Callback<AboutTheApp>() {
+            @Override
+            public void onResponse(@NotNull Call<AboutTheApp> call, @NotNull Response<AboutTheApp> response) {
+                AboutTheApp data = response.body();
+                homeActivityViewModel.setAboutApp(data);
+            }
+
+            @Override
+            public void onFailure(Call<AboutTheApp> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -238,8 +257,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navController.navigate(R.id.businessFriendFragment);
 
         } else if (id == R.id.contact) {
-
             Intent i = new Intent(this, ContactUs.class);
+            i.putExtra("email", homeActivityViewModel.about.getValue().getEmail());
+            i.putExtra("mobile", homeActivityViewModel.about.getValue().getMobile());
+            startActivity(i);
+
+        } else if (id == R.id.about) {
+            Intent i = new Intent(this, AboutApp.class);
+            i.putExtra("about", homeActivityViewModel.about.getValue().getAbout());
             startActivity(i);
         }
         return true;

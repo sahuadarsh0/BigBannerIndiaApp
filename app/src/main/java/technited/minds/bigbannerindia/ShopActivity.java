@@ -1,6 +1,7 @@
 package technited.minds.bigbannerindia;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.parceler.Parcels;
 
+import technited.minds.androidutils.MD;
 import technited.minds.bigbannerindia.adapters.OfferAdapter;
 import technited.minds.bigbannerindia.adapters.ProductsAdapter;
 import technited.minds.bigbannerindia.models.Shop;
@@ -81,5 +84,13 @@ public class ShopActivity extends AppCompatActivity {
         recycler_products_container.setLayoutManager(new LinearLayoutManager(this));
         recycler_products_container.setAdapter(new ProductsAdapter(this, shop.getProduct()));
 
+
+        FloatingActionButton info = findViewById(R.id.info);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MD.alert(ShopActivity.this, "About", Html.fromHtml(shop.getAbout()), "OK");
+            }
+        });
     }
 }

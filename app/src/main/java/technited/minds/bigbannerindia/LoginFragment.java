@@ -27,6 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import technited.minds.androidutils.MD;
+import technited.minds.androidutils.ProcessDialog;
 import technited.minds.androidutils.SharedPrefs;
 import technited.minds.bigbannerindia.models.Customer;
 import technited.minds.bigbannerindia.models.Received;
@@ -36,9 +37,7 @@ public class LoginFragment extends Fragment {
     private Context context;
     private SharedPrefs loginSharedPrefs;
     private TextInputEditText etMobile, etPassword;
-
-    public LoginFragment() {
-    }
+    ProcessDialog processDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +54,7 @@ public class LoginFragment extends Fragment {
         context = requireContext();
         loginSharedPrefs = new SharedPrefs(context, "CUSTOMER");
 
+        processDialog = new ProcessDialog(context);
         etMobile = view.findViewById(R.id.mobile);
         etPassword = view.findViewById(R.id.password);
         TextView register_text = view.findViewById(R.id.register_text);
@@ -100,13 +100,13 @@ public class LoginFragment extends Fragment {
         }
 
         if (flag) {
-
+            processDialog.show();
             Call<Received> loginCustomerCall = AccountsApi.getApiService().loginCustomer(mobile, password);
 
             loginCustomerCall.enqueue(new Callback<Received>() {
                 @Override
                 public void onResponse(@NotNull Call<Received> call, @NotNull Response<Received> response) {
-
+                    processDialog.dismiss();
                     Received data = response.body();
                     assert data != null;
 
@@ -137,6 +137,8 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onFailure(@NotNull Call<Received> call, @NotNull Throwable t) {
                     Log.e("ASA", "onFailure: " + t.getMessage(), t);
+                    processDialog.dismiss();
+
                 }
             });
 
