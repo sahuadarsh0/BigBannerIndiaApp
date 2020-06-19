@@ -119,5 +119,14 @@
             android:id="@+id/action_localJobsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="technited.minds.bigbannerindia.ServicesFragment"
+        android:label="fragment_servives"
+        tools:layout="@layout/fragment_servives">
+        <action
+            android:id="@+id/action_servicesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>

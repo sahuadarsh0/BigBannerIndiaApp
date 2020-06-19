@@ -22,6 +22,7 @@ import technited.minds.bigbannerindia.models.Comment;
 import technited.minds.bigbannerindia.models.LocalJob;
 import technited.minds.bigbannerindia.models.Product;
 import technited.minds.bigbannerindia.models.Received;
+import technited.minds.bigbannerindia.models.Service;
 import technited.minds.bigbannerindia.models.Slider;
 
 class HomeApi {
@@ -92,6 +93,10 @@ class HomeApi {
 
         @GET("getLocalJobs/")
         Call<List<LocalJob>> getLocalJobs();
+
+
+        @GET("getServices/")
+        Call<List<Service>> getServices();
 
     }
 

@@ -12,7 +12,8 @@ public enum API {
     VIDEO_SLIDER_FOLDER(ASSETS_URL + "slider/"),
     BANNER_FOLDER(ASSETS_URL + "banner/"),
     OFFER_FOLDER(ASSETS_URL + "offer/"),
-    PRODUCT_FOLDER(ASSETS_URL + "product/");
+    PRODUCT_FOLDER(ASSETS_URL + "product/"),
+    SERVICE_FOLDER(ASSETS_URL + "service/");
 
     private final String text;
 

@@ -249,7 +249,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.END);
 
         if (id == R.id.our_services) {
-            // Handle the camera action
+            navController.navigate(R.id.servicesFragment);
         } else if (id == R.id.local_jobs) {
             navController.navigate(R.id.localJobsFragment);
 
