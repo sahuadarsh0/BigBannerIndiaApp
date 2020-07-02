@@ -260,6 +260,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(this, ContactUs.class);
             i.putExtra("email", homeActivityViewModel.about.getValue().getEmail());
             i.putExtra("mobile", homeActivityViewModel.about.getValue().getMobile());
+            i.putExtra("mobile2", homeActivityViewModel.about.getValue().getMobile2());
             startActivity(i);
 
         } else if (id == R.id.about) {

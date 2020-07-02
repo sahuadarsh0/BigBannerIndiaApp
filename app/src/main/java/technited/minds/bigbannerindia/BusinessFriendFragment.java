@@ -93,6 +93,8 @@ public class BusinessFriendFragment extends Fragment {
                 gender = "Female";
             }
 
+            Log.d("asa", "checkedId: " + checkedId);
+
         });
 
         // Get Spinners

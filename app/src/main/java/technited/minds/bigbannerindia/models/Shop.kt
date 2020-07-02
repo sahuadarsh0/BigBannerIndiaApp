@@ -15,6 +15,8 @@ data class Shop(
         val district: String? = null,
         val city: String? = null,
         val mobile: String? = null,
+        val mobile2: String? = null,
+        val mobile3: String? = null,
         val locality: String? = null,
         val gst: String? = null,
         val banner: String? = null,

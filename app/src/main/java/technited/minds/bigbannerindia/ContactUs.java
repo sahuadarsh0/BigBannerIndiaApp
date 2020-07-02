@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ContactUs extends AppCompatActivity {
-    TextView call, email;
+    TextView call, call2, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +19,14 @@ public class ContactUs extends AppCompatActivity {
 
 
         call = findViewById(R.id.contact_us);
+        call2 = findViewById(R.id.contact_us2);
         email = findViewById(R.id.email);
 
         Intent i = getIntent();
 
         email.setText(i.getStringExtra("email"));
         call.setText(i.getStringExtra("mobile"));
+        call2.setText(i.getStringExtra("mobile2"));
 
 
         call.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +35,16 @@ public class ContactUs extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" + call.getText().toString()));
+                startActivity(intent);
+            }
+        });
+
+        call2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + call2.getText().toString()));
                 startActivity(intent);
             }
         });

@@ -28,6 +28,7 @@ import technited.minds.bigbannerindia.API;
 import technited.minds.bigbannerindia.HomeFragmentDirections;
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.ShopActivity;
+import technited.minds.bigbannerindia.ShopsFragmentDirections;
 import technited.minds.bigbannerindia.models.Offer;
 import technited.minds.bigbannerindia.models.Shop;
 
@@ -81,7 +82,8 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
         });
         holder.offer_layout.setOnClickListener(v -> {
             Offer[] o = s.getOffer().toArray(new Offer[]{});
-            NavDirections action = HomeFragmentDirections.actionHomeFragmentToOffersFragment(o);
+//            NavDirections action = HomeFragmentDirections.actionHomeFragmentToOffersFragment(o);
+            NavDirections action = ShopsFragmentDirections.actionShopsFragmentToOffersFragment(o);
             Navigation.findNavController(v).navigate(action);
 
 

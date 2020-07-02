@@ -3,7 +3,7 @@ package technited.minds.bigbannerindia;
 import org.jetbrains.annotations.NotNull;
 
 public enum API {
-    //    URL("http://192.168.43.96/Bigbannerindia.com/admin/"),
+//        URL("http://192.168.43.96/Bigbannerindia.com/admin/"),
     URL("http://bigbannerindia.com/admin/"),
 
     BASE_URL(URL + "api/"),

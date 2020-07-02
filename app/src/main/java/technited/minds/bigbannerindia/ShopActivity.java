@@ -2,6 +2,7 @@ package technited.minds.bigbannerindia;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,7 +66,17 @@ public class ShopActivity extends AppCompatActivity {
 
         String add = shop.getAddress().concat(", ").concat(shop.getLocality())
                 .concat(", ").concat(shop.getCity())
-                .concat(", ").concat(shop.getState());
+                .concat(", ").concat(shop.getPostalCode())
+                .concat(", ").concat(shop.getState())
+                .concat(",\nMobile : ").concat(shop.getMobile());
+        if (!shop.getMobile2().isEmpty()) {
+            add = add.concat(", ").concat(shop.getMobile2());
+            Log.d("asa", "onCreate: " + shop.getMobile2());
+        }
+        if (!shop.getMobile3().isEmpty()) {
+            add = add.concat(", ").concat(shop.getMobile3());
+            Log.d("asa", "onCreate: " + shop.getMobile3());
+        }
 
         address.setText(add);
 
@@ -89,7 +100,7 @@ public class ShopActivity extends AppCompatActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MD.alert(ShopActivity.this, "About", Html.fromHtml(shop.getAbout()), "OK");
+                MD.alert(ShopActivity.this, "About", Html.fromHtml(shop.getAbout()).toString(), "OK");
             }
         });
     }

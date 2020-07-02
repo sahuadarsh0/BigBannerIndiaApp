@@ -15,14 +15,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import technited.minds.bigbannerindia.adapters.AllShopAdapter;
+import technited.minds.bigbannerindia.adapters.CategoryAdapter;
 import technited.minds.bigbannerindia.models.Category;
-import technited.minds.bigbannerindia.models.Shop;
 
 
 public class ShopsFragment extends Fragment {
@@ -47,33 +43,45 @@ public class ShopsFragment extends Fragment {
         HomeActivityViewModel homeActivityViewModel = new ViewModelProvider(requireActivity()).get(HomeActivityViewModel.class);
         context = requireContext();
 
+//
+//        RecyclerView recycler_categories = view.findViewById(R.id.recycler_all_shops);
+//        recycler_categories.setLayoutManager(new LinearLayoutManager(context));
+//        homeActivityViewModel.category.observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+//            @Override
+//            public void onChanged(List<Category> categories) {
+//
+//                if (categories.size() > 0) {
+//                    List<Shop> shops = new ArrayList<>();
+//                    for (int i = 0; i < categories.size(); i++) {
+//                        shops.addAll(categories.get(i).getShop());
+//                    }
+//
+//                    Collections.sort(shops, new Comparator<Shop>() {
+//                        @Override
+//                        public int compare(Shop lhs, Shop rhs) {
+//                            if (Integer.parseInt(lhs.getId()) < Integer.parseInt(rhs.getId())) {
+//                                return -1;
+//                            } else {
+//                                return 1;
+//                            }
+//                        }
+//                    });
+//                    recycler_categories.setAdapter(new AllShopAdapter(context, shops));
+//                }
+//            }
+//        });
 
-        RecyclerView recycler_categories = view.findViewById(R.id.recycler_all_shops);
+
+        RecyclerView recycler_categories = view.findViewById(R.id.recycler_categories);
         recycler_categories.setLayoutManager(new LinearLayoutManager(context));
         homeActivityViewModel.category.observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
-
-                if (categories.size() > 0) {
-                    List<Shop> shops = new ArrayList<>();
-                    for (int i = 0; i < categories.size(); i++) {
-                        shops.addAll(categories.get(i).getShop());
-                    }
-
-                    Collections.sort(shops, new Comparator<Shop>() {
-                        @Override
-                        public int compare(Shop lhs, Shop rhs) {
-                            if (Integer.parseInt(lhs.getId()) < Integer.parseInt(rhs.getId())) {
-                                return -1;
-                            } else {
-                                return 1;
-                            }
-                        }
-                    });
-                    recycler_categories.setAdapter(new AllShopAdapter(context, shops));
-                }
+                if (categories != null)
+                    recycler_categories.setAdapter(new CategoryAdapter(context, categories));
             }
         });
+
 
 
     }

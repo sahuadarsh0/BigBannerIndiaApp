@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLight"
+    android:background="@drawable/bd_splash"
     tools:context=".AccountFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/quantum_bluegrey50"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

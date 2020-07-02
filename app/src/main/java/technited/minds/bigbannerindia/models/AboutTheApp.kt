@@ -8,6 +8,9 @@ data class AboutTheApp(
         @field:SerializedName("mobile")
         val mobile: String? = null,
 
+        @field:SerializedName("mobile2")
+        val mobile2: String? = null,
+
         @field:SerializedName("about")
         val about: String? = null,
 

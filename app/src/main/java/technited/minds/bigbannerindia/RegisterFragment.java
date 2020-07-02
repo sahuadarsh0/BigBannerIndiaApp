@@ -64,8 +64,8 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        processDialog = new ProcessDialog(context);
         context = requireContext();
+        processDialog = new ProcessDialog(context);
         state_ids = district_ids = city_ids = locality_ids = postal_code_ids = new ArrayList<>();
         state_id = district_id = city_id = locality_id = postal_code_id = new String();
         ConstraintLayout layout = view.findViewById(R.id.request_layout);
@@ -110,6 +110,8 @@ public class RegisterFragment extends Fragment {
             } else if (checkedId % 2 == 1) {
                 gender = "Female";
             }
+
+            Log.d("asa", "checkedId: " + checkedId);
 
         });
 

@@ -106,7 +106,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/linotte_regular"
-        android:text="Contact"
+        android:text="Contact No."
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,18 +126,45 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/textView22"
+        style="@style/TextBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/linotte_regular"
+        android:text="Alternate No."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/contact_us2"
+        style="@style/TextBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/linotte_semi_bold"
+        android:text="+91 9131869705"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView22"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/textView2"
         style="@style/TextBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/linotte_regular"
         android:text="Email"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_us" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_us2" />
 
     <TextView
         android:id="@+id/email"
