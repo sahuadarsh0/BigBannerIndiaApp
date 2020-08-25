@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import technited.minds.bigbannerindia.HomeActivity;
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.models.Category;
 
@@ -44,6 +47,29 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         else
             holder.category.setVisibility(View.GONE);
 
+
+
+
+        class RemindTask extends TimerTask {
+
+            @Override
+            public void run() {
+                ((HomeActivity)context).runOnUiThread(new Runnable() {
+                    public void run() {
+                        if (holder.position == c.getShop().size()) {
+                            holder.position = 0;
+                        }
+                        holder.recycler_shops.smoothScrollToPosition(holder.position);
+                        holder.position++;
+                    }
+                });
+
+            }
+        }
+
+        holder.timer = new Timer();
+        holder.timer.scheduleAtFixedRate(new RemindTask(), 200, 3500); // delay*/
+
     }
 
     @Override
@@ -64,6 +90,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView category;
         RecyclerView recycler_shops;
+        Timer timer;
+        public int position =0;
 
         CategoryViewHolder(@NonNull View itemView) {
             super(itemView);

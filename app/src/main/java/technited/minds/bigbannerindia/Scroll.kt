@@ -1,2 +1,0 @@
-package technited.minds.bigbannerindia
-

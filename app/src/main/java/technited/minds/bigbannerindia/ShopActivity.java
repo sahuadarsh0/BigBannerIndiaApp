@@ -98,7 +98,6 @@ public class ShopActivity extends AppCompatActivity {
         recycler_products_container.setAdapter(new ProductsAdapter(this, shop.getProduct()));
 
 
-
         FloatingActionButton info = findViewById(R.id.info);
         info.setOnClickListener(new View.OnClickListener() {
             @Override
