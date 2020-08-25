@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,7 +94,9 @@ public class ShopActivity extends AppCompatActivity {
 
         RecyclerView recycler_products_container = findViewById(R.id.recycler_products_container);
         recycler_products_container.setLayoutManager(new LinearLayoutManager(this));
+        recycler_products_container.setLayoutManager(new GridLayoutManager(this, 2));
         recycler_products_container.setAdapter(new ProductsAdapter(this, shop.getProduct()));
+
 
 
         FloatingActionButton info = findViewById(R.id.info);

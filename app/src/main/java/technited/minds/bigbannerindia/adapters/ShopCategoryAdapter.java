@@ -25,7 +25,6 @@ import java.util.List;
 import technited.minds.androidutils.MD;
 import technited.minds.androidutils.SharedPrefs;
 import technited.minds.bigbannerindia.API;
-import technited.minds.bigbannerindia.HomeFragmentDirections;
 import technited.minds.bigbannerindia.R;
 import technited.minds.bigbannerindia.ShopActivity;
 import technited.minds.bigbannerindia.ShopsFragmentDirections;
@@ -70,7 +69,9 @@ public class ShopCategoryAdapter extends RecyclerView.Adapter<ShopCategoryAdapte
 
         holder.banner.setOnClickListener(v -> {
             if (loginSharedPrefs.get("customer_id") == null) {
-                NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginFragment();
+//                NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginFragment();
+                NavDirections action = ShopsFragmentDirections.actionShopsFragmentToLoginFragment();
+
                 MD.alert(v.getContext(), "Login Required", "To see shop details you have to login first", "ok", v, action);
             } else {
                 Intent i = new Intent(context, ShopActivity.class);
