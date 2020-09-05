@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_searchFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_offersFragment"
+            app:destination="@id/offersFragment" />
     </fragment>
     <fragment
         android:id="@+id/businessFriendFragment"

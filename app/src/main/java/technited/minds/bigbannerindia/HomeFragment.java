@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
 
     private void getSliderVideos() {
 
-        Call<List<Slider>> videoSlider = HomeApi.getApiService().getSliderVideos();
+        Call<List<Slider>> videoSlider = HomeApi.getApiService().getSliders();
         videoSlider.enqueue(new Callback<List<Slider>>() {
             @Override
             public void onResponse(Call<List<Slider>> call, Response<List<Slider>> response) {

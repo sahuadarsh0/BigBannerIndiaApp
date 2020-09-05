@@ -1,9 +1,13 @@
 package technited.minds.bigbannerindia;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +39,7 @@ import technited.minds.bigbannerindia.models.Comment;
 import technited.minds.bigbannerindia.models.Like;
 import technited.minds.bigbannerindia.models.Product;
 import technited.minds.bigbannerindia.models.Received;
+import technited.minds.bigbannerindia.models.Request;
 
 public class ProductActivity extends AppCompatActivity {
     String product_id;
@@ -46,7 +51,9 @@ public class ProductActivity extends AppCompatActivity {
     private SharedPrefs loginSharedPrefs;
     EditText comment_edit;
     Comment comment;
-    Button request_item;
+    Button request_item, cancel_item;
+    private Dialog address_order_qty_dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,17 @@ public class ProductActivity extends AppCompatActivity {
 
         processDialog = new ProcessDialog(this);
         processDialog.show();
+
+
+        address_order_qty_dialog = new Dialog(this);
+        address_order_qty_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        address_order_qty_dialog.setContentView(R.layout.address_order_qty_dialog);
+        Window window1 = address_order_qty_dialog.getWindow();
+        window1.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window1.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        window1.setBackgroundDrawableResource(R.color.semi_transparent);
+        address_order_qty_dialog.setCancelable(true);
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -69,14 +87,48 @@ public class ProductActivity extends AppCompatActivity {
 
         like = findViewById(R.id.like);
         request_item = findViewById(R.id.request_item);
+        cancel_item = findViewById(R.id.cancel_item);
         comment_edit = findViewById(R.id.comment_edit);
 
+        String curAddress = loginSharedPrefs.get("name").trim() + ", " +
+                loginSharedPrefs.get("address").trim() + ", " +
+                loginSharedPrefs.get("city").trim() + ", " +
+                loginSharedPrefs.get("locality").trim() + ", " +
+                loginSharedPrefs.get("postalCode").trim() + ", " +
+                loginSharedPrefs.get("mobile").trim();
+        TextView address_text = address_order_qty_dialog.findViewById(R.id.text2);
+        TextView order_qty_text = address_order_qty_dialog.findViewById(R.id.text);
+        TextView submit = address_order_qty_dialog.findViewById(R.id.submit);
+        TextView cancel = address_order_qty_dialog.findViewById(R.id.cancel);
+        address_text.setText(curAddress);
+        order_qty_text.setText("1");
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String add = address_text.getText().toString();
+                String qty = order_qty_text.getText().toString();
+                if (!add.equals("") && !qty.equals(""))
+                    requestProduct(product_id, loginSharedPrefs.get("customer_id"), add, qty);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                address_order_qty_dialog.dismiss();
+            }
+        });
 
         request_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processDialog.show();
-                requestProduct(product_id, loginSharedPrefs.get("customer_id"));
+                address_order_qty_dialog.show();
+            }
+        });
+        cancel_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestProduct(product_id, loginSharedPrefs.get("customer_id"), "0", "0");
             }
         });
         like.setOnClickListener(new View.OnClickListener() {
@@ -134,20 +186,25 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
-    private void requestProduct(String product_id, String customer_id) {
-
-        Call<Received> checkRequest = HomeApi.getApiService().requestProduct(product_id, customer_id);
+    private void requestProduct(String product_id, String customer_id, String address, String qty) {
+        processDialog.show();
+        Call<Received> checkRequest = HomeApi.getApiService().requestProduct(product_id, customer_id, address, qty);
         checkRequest.enqueue(new Callback<Received>() {
             @Override
             public void onResponse(Call<Received> call, Response<Received> response) {
                 Received data = response.body();
                 processDialog.dismiss();
 
-                if (data.getMsg().equals("Successful"))
-                    MD.alert(ProductActivity.this, data.getMsg(), data.getDetails(), "OK");
+                MD.alert(ProductActivity.this, data.getMsg(), data.getDetails(), "OK");
 
-                else
-                    MD.alert(ProductActivity.this, data.getMsg(), data.getDetails());
+                //Refreshing page to update button
+                Handler handler1;
+                handler1 = new Handler();
+                Runnable runnable = () -> {
+                    finish();
+                    startActivity(getIntent());
+                };
+                handler1.postDelayed(runnable, 4000);
 
             }
 
@@ -201,11 +258,21 @@ public class ProductActivity extends AppCompatActivity {
                 assert products != null;
                 Product product = products.get(0);
 
-//                request
+//                request visibility
                 if (product.getRequestStatus().equals("0")) {
                     request_item.setVisibility(View.INVISIBLE);
+                    cancel_item.setVisibility(View.INVISIBLE);
                 }
 
+//                check request state for current customer
+                for (Request temp : product.getRequests()) {
+                    if (temp.getCustomerId().equals(loginSharedPrefs.get("customer_id"))) {
+                        if (temp.getStatus().equals("ACTIVE")) {
+                            request_item.setVisibility(View.INVISIBLE);
+                            cancel_item.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
 
 //                comment
                 if (product.getCommentStatus().equals("0")) {

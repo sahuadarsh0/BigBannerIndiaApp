@@ -63,8 +63,8 @@ class HomeApi {
         @GET("getAboutApp/")
         Call<AboutTheApp> getAboutApp();
 
-        @GET("slider_videos/")
-        Call<List<Slider>> getSliderVideos();
+        @GET("slider/")
+        Call<List<Slider>> getSliders();
 
         @GET("categories/")
         Call<List<Category>> getCategories();
@@ -83,7 +83,9 @@ class HomeApi {
         @POST("requestProduct")
         Call<Received> requestProduct(
                 @Field("product_id") String product_id,
-                @Field("customer_id") String customer_id
+                @Field("customer_id") String customer_id,
+                @Field("address") String address,
+                @Field("qty") String qty
         );
 
         @Headers("Content-Type: application/json")

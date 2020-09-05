@@ -6,5 +6,7 @@ data class Slider(
 
         val id: String? = null,
 
-        val video: String? = null
+        val video: String? = null,
+
+        val image: String? = null
 )
