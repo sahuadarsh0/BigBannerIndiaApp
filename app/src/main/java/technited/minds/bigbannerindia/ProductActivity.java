@@ -1,4 +1,4 @@
-package technited.minds.bigbannerindia;
+ package technited.minds.bigbannerindia;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -21,6 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.glide.slider.library.SliderLayout;
+import com.glide.slider.library.animations.DescriptionAnimation;
+import com.glide.slider.library.slidertypes.DefaultSliderView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,6 +40,7 @@ import technited.minds.androidutils.ProcessDialog;
 import technited.minds.androidutils.SharedPrefs;
 import technited.minds.bigbannerindia.adapters.CommentsAdapter;
 import technited.minds.bigbannerindia.models.Comment;
+import technited.minds.bigbannerindia.models.Image;
 import technited.minds.bigbannerindia.models.Like;
 import technited.minds.bigbannerindia.models.Product;
 import technited.minds.bigbannerindia.models.Received;
@@ -339,6 +344,39 @@ public class ProductActivity extends AppCompatActivity {
                 .load(url)
                 .placeholder(R.drawable.product)
                 .into(product_image);
+
+        SliderLayout imageSlider =findViewById(R.id.slider);
+
+        if (product.getImages().size()>0){
+            List<Image> images = product.getImages();
+            product_image.setVisibility(View.GONE);
+            imageSlider.setVisibility(View.VISIBLE);
+            RequestOptions requestOptions = new RequestOptions().fitCenter().placeholder(R.drawable.product);
+            for (int i = images.size()-1; i >= 0; i--) {
+                DefaultSliderView sliderView = new DefaultSliderView(this);
+                String path = API.PRODUCT_FOLDER.toString() + images.get(i).getImage();
+
+                sliderView
+                        .image(path)
+                        .setRequestOption(requestOptions)
+                        .setProgressBarVisible(true);
+
+                //add your extra information
+                imageSlider.addSlider(sliderView);
+            }
+
+            imageSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+
+            imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+            imageSlider.setCustomAnimation(new DescriptionAnimation());
+            imageSlider.setDuration(3000);
+            imageSlider.stopCyclingWhenTouch(true);
+
+        }
+        else{
+            product_image.setVisibility(View.VISIBLE);
+            imageSlider.setVisibility(View.GONE);
+        }
 
         collapsingToolbarLayout.setTitle(product.getName());
         toolbar1.setTitle(product.getName());

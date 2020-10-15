@@ -3,6 +3,7 @@ package technited.minds.bigbannerindia;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import technited.minds.bigbannerindia.models.AboutTheApp;
@@ -15,6 +16,9 @@ public class HomeActivityViewModel extends ViewModel {
 
     MutableLiveData<AboutTheApp>
             about = new MutableLiveData<>();
+
+    MutableLiveData<ArrayList<List<String>>>
+            imo = new MutableLiveData<>();
 
     public void setCategory(List<Category> category) {
         this.category.setValue(category);

@@ -11,6 +11,7 @@ data class Product(
 
         val image: String? = null,
         val flag: String? = null,
+        val images: List<Image?>? = null,
         val comments: List<Comment?>? = null,
         val requests: List<Request?>? = null,
 
@@ -30,6 +31,18 @@ data class Product(
         val clientName: String? = null,
 
         val likes: List<Like?>? = null
+)
+
+@Parcel
+data class Image(
+        val cdt: String? = null,
+        val flag: String? = null,
+
+        @field:SerializedName("product_id")
+        val productId: String? = null,
+
+        val image: String? = null,
+        val id: String? = null,
 )
 
 @Parcel
