@@ -30,6 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.rezwan.knetworklib.KNetwork;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -263,6 +264,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             i.putExtra("mobile2", homeActivityViewModel.about.getValue().getMobile2());
             startActivity(i);
 
+        } else if (id == R.id.share) {
+
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Hey check out my app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+            );
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+            Toast.makeText(context, "Share the app", Toast.LENGTH_SHORT).show();
+
+
         } else if (id == R.id.about) {
             Intent i = new Intent(this, AboutApp.class);
             i.putExtra("about", homeActivityViewModel.about.getValue().getAbout());
@@ -304,4 +319,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    public void onNetError(@Nullable String s) {
+
+    }
 }

@@ -13,6 +13,7 @@
         android:layout_height="@dimen/shrine_toolbar_collapsed_height"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
+        android:background="@color/colorBottomDark"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/ToolBarStyle" />
@@ -28,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/shrine_toolbar_collapsed_height"
-            app:contentScrim="@color/white"
+            app:contentScrim="@color/colorBottomDark"
             app:expandedTitleGravity="top"
             app:expandedTitleMarginStart="@dimen/shrine_toolbar_offset_start"
             app:expandedTitleMarginTop="@dimen/shrine_toolbar_offset_top"

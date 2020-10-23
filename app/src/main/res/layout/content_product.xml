@@ -13,6 +13,21 @@
         android:layout_height="wrap_content"
         android:minHeight="450dp">
 
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/linotte_light"
+            android:textSize="14sp"
+            android:padding="10dp"
+            tools:text="Product description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
         <Button
             android:id="@+id/request_item"
             style="@style/ButtonStyle.Blue"
@@ -22,7 +37,7 @@
             android:text="Order Now"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <Button
             android:id="@+id/cancel_item"

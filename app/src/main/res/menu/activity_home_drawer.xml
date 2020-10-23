@@ -33,6 +33,11 @@
             android:icon="@drawable/ic_operator"
             android:title="Business Friend" />
 
+        <item
+            android:id="@+id/share"
+            android:icon="@android:drawable/ic_menu_share"
+            android:title="Share the app" />
+
 
         <item
             android:id="@+id/about"

@@ -1,8 +1,9 @@
- package technited.minds.bigbannerindia;
+package technited.minds.bigbannerindia;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -58,6 +59,7 @@ public class ProductActivity extends AppCompatActivity {
     Comment comment;
     Button request_item, cancel_item;
     private Dialog address_order_qty_dialog;
+    TextView description;
 
 
     @Override
@@ -70,6 +72,7 @@ public class ProductActivity extends AppCompatActivity {
         processDialog = new ProcessDialog(this);
         processDialog.show();
 
+        description = findViewById(R.id.description);
 
         address_order_qty_dialog = new Dialog(this);
         address_order_qty_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -301,6 +304,10 @@ public class ProductActivity extends AppCompatActivity {
                         }
                     }
                 }
+                // description
+                if (product.getDescription() != null)
+                    description.setText(Html.fromHtml(product.getDescription()));
+
                 initToolbar(product);
             }
 
@@ -345,14 +352,14 @@ public class ProductActivity extends AppCompatActivity {
                 .placeholder(R.drawable.product)
                 .into(product_image);
 
-        SliderLayout imageSlider =findViewById(R.id.slider);
+        SliderLayout imageSlider = findViewById(R.id.slider);
 
-        if (product.getImages().size()>0){
+        if (product.getImages().size() > 0) {
             List<Image> images = product.getImages();
             product_image.setVisibility(View.GONE);
             imageSlider.setVisibility(View.VISIBLE);
             RequestOptions requestOptions = new RequestOptions().fitCenter().placeholder(R.drawable.product);
-            for (int i = images.size()-1; i >= 0; i--) {
+            for (int i = images.size() - 1; i >= 0; i--) {
                 DefaultSliderView sliderView = new DefaultSliderView(this);
                 String path = API.PRODUCT_FOLDER.toString() + images.get(i).getImage();
 
@@ -372,8 +379,7 @@ public class ProductActivity extends AppCompatActivity {
             imageSlider.setDuration(3000);
             imageSlider.stopCyclingWhenTouch(true);
 
-        }
-        else{
+        } else {
             product_image.setVisibility(View.VISIBLE);
             imageSlider.setVisibility(View.GONE);
         }

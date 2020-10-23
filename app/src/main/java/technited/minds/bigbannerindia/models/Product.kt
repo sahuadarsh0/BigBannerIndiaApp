@@ -24,6 +24,7 @@ data class Product(
 
         val cdt: String? = null,
         val name: String? = null,
+        val description: String? = null,
         val id: String? = null,
         val stock: String? = null,
 
