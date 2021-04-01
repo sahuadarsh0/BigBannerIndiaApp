@@ -210,7 +210,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     dialog.setCancelable(true);
                     btn.setOnClickListener(v -> {
 
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(API.BASE_URL.toString() + "app"));
+                        Intent browserIntent = null;
+                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName()));
+                        Log.d("asar", "onResponse: " + Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageManager()));
                         startActivity(browserIntent);
 
                     });

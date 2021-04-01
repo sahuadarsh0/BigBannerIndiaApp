@@ -56,13 +56,16 @@ public class LocalJobAdapter extends RecyclerView.Adapter<LocalJobAdapter.Catego
 
 
         List<Integer> list = new ArrayList<>();
-        list.add(R.color.quantum_deeporangeA100);
+        list.add(R.color.quantum_cyanA100);
         list.add(R.color.quantum_yellowA100);
         list.add(R.color.quantum_vanillablueA100);
-        list.add(R.color.quantum_vanillaredA100);
+        list.add(R.color.quantum_vanillagreenA100);
         list.add(R.color.quantum_tealA100);
         list.add(R.color.quantum_limeA100);
         list.add(R.color.quantum_lightblueA100);
+        list.add(R.color.quantum_googgreenA100);
+        list.add(R.color.quantum_lightgreenA100);
+        list.add(R.color.quantum_amber100);
 
         holder.job_layout.setCardBackgroundColor(context.getResources().getColor(getRandomElement(list)));
     }

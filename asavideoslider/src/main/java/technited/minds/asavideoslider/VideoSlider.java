@@ -68,7 +68,7 @@ public class VideoSlider extends Fragment {
 
         pager2.setPageTransformer(transformer);
 
-        slider_media_number.setVisibility(View.VISIBLE);
+        slider_media_number.setVisibility(View.GONE);
         slider_media_number.setText((pager2.getCurrentItem() + 1) + "/" + urlList.size());
 
 

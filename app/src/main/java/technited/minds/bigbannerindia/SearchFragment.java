@@ -63,19 +63,25 @@ public class SearchFragment extends Fragment {
                         if (shops.size() > 0) {
                             for (Shop shop : shops) {
                                 boolean flag = false;
-                                if (shop.getName().toLowerCase().contains(v.getText().toString())) {
+                                if (shop.getName().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
-                                } else if (shop.getState().toLowerCase().contains(v.getText().toString())) {
+                                } else if (shop.getState().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
-                                } else if (shop.getDistrict().toLowerCase().contains(v.getText().toString())) {
+                                } else if (shop.getCountry().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
-                                } else if (shop.getCity().toLowerCase().contains(v.getText().toString())) {
+                                } else if (shop.getAddress().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
-                                } else if (shop.getPostalCode().toLowerCase().contains(v.getText().toString())) {
+                                }else if (shop.getCategory().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
-                                } else if (shop.getLocality().toLowerCase().contains(v.getText().toString())) {
+                                } else if (shop.getDistrict().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
-                                } else if (shop.getSrn().toLowerCase().contains(v.getText().toString())) {
+                                } else if (shop.getCity().toLowerCase().contains(v.getText().toString().toLowerCase())) {
+                                    flag = true;
+                                } else if (shop.getPostalCode().toLowerCase().contains(v.getText().toString().toLowerCase())) {
+                                    flag = true;
+                                } else if (shop.getLocality().toLowerCase().contains(v.getText().toString().toLowerCase())) {
+                                    flag = true;
+                                } else if (shop.getSrn().toLowerCase().contains(v.getText().toString().toLowerCase())) {
                                     flag = true;
                                 }
                                 if (flag) newList.add(shop);

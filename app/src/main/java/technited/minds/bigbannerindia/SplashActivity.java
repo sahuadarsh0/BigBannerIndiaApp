@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.rezwan.knetworklib.KNetwork;
 
+import org.jetbrains.annotations.Nullable;
+
 import technited.minds.androidutils.MD;
 
 
@@ -38,25 +40,22 @@ public class SplashActivity extends AppCompatActivity implements KNetwork.OnNetW
     @Override
     public void onNetConnected() {
         handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                handler.removeCallbacks(runnable);
-                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                finish();
-            }
+        handler.postDelayed(() -> {
+            handler.removeCallbacks(runnable);
+            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+            finish();
         }, 3000);
     }
 
     @Override
     public void onNetDisConnected() {
         handler = new Handler();
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                MD.alert(SplashActivity.this, "No Internet", "Please check your internet connection and try again!!!", "yes");
-            }
-        };
+        runnable = () -> MD.alert(SplashActivity.this, "No Internet", "Please check your internet connection and try again!!!", "yes");
         handler.postDelayed(runnable, 3000);
+    }
+
+    @Override
+    public void onNetError(@Nullable String s) {
+
     }
 }

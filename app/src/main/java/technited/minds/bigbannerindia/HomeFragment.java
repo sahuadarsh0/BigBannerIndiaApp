@@ -3,6 +3,7 @@ package technited.minds.bigbannerindia;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -74,18 +74,16 @@ public class HomeFragment extends Fragment {
                     for (int i = 0; i < categories.size(); i++) {
                         shops.addAll(categories.get(i).getShop());
                     }
-                    Collections.sort(shops, new Comparator<Shop>() {
-                        @Override
-                        public int compare(Shop lhs, Shop rhs) {
-                            if (Integer.parseInt(lhs.getId()) < Integer.parseInt(rhs.getId())) {
-                                return -1;
-                            } else {
-                                return 1;
-                            }
+                    Collections.sort(shops, (lhs, rhs) -> {
+                        if (Integer.parseInt(lhs.getId()) < Integer.parseInt(rhs.getId())) {
+                            return -1;
+                        } else {
+                            return 1;
                         }
                     });
                     ArrayList<List<String>> image = homeActivityViewModel.imo.getValue();
-                    for (int i = 0, j = 0, k = 0; i < shops.size() + image.size(); i++) {
+                    if (image != null) {
+                        for (int i = 0, j = 0, k = 0; i < shops.size() + image.size(); i++) {
                             HomeItems item = null;
                             if ((i + 1) % 3 != 0) {
                                 item = new HomeItems(i, 0, shops.get(j), new ArrayList<>());
@@ -103,6 +101,35 @@ public class HomeFragment extends Fragment {
                         }
                         recycler_categories.setItemViewCacheSize(items.size());
                         allShopAdapter.notifyDataSetChanged();
+                    } else {
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                ArrayList<List<String>> image = homeActivityViewModel.imo.getValue();
+                                for (int i = 0, j = 0, k = 0; i < shops.size() + image.size(); i++) {
+                                    HomeItems item = null;
+                                    if ((i + 1) % 3 != 0) {
+                                        item = new HomeItems(i, 0, shops.get(j), new ArrayList<>());
+                                        j++;
+                                    } else {
+                                        if (image.size() > k) {
+                                            item = new HomeItems(i, 1, new Object(), image.get(k));
+                                            k++;
+                                        } else {
+                                            item = new HomeItems(i, 0, shops.get(j), new ArrayList<>());
+                                            j++;
+                                        }
+                                    }
+                                    items.add(item);
+                                }
+
+                                recycler_categories.setItemViewCacheSize(items.size());
+                                allShopAdapter.notifyDataSetChanged();
+                            }
+                        };
+                        handler.postDelayed(runnable, 3000);
+                    }
 
                 }
             }
@@ -129,11 +156,18 @@ public class HomeFragment extends Fragment {
                         images.add(API.IMAGE_SLIDER_FOLDER.toString() + slider.get(i).getImage());
                     }
                 }
-                for (int i = images.size() - 1; i > 0; i -= 2) {
+//                for (int i = images.size() - 1; i > 0; i -= 5) {
+//                    ArrayList<List<String>> image = new ArrayList<>();
+//                    if (i - 5 < 0)
+//                        image.add(images.subList(0, i));
+//                    else image.add(images.subList(i - 5, i));
+//                    imo.addAll(image);
+//                }
+                for (int i = 0; i < images.size(); i += 5) {
                     ArrayList<List<String>> image = new ArrayList<>();
-                    if (i - 2 < 0)
-                        image.add(images.subList(0, i));
-                    else image.add(images.subList(i - 2, i));
+                    if (i + 5 > images.size())
+                        image.add(images.subList(i, images.size()));
+                    else image.add(images.subList(i, i + 5));
                     imo.addAll(image);
                 }
                 homeActivityViewModel.imo.setValue(imo);
