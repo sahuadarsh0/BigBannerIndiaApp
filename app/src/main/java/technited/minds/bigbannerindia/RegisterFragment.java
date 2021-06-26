@@ -377,11 +377,15 @@ public class RegisterFragment extends Fragment {
                     Received data = response.body();
                     NavDirections action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
 
-                    if (data.getMsg().equals("Successful"))
-                        MD.alert(getActivity(), data.getMsg(), data.getDetails(), "Login", getView(), action);
+                    if (data != null) {
+                        if (data.getMsg().equals("Successful"))
+                            MD.alert(getActivity(), data.getMsg(), data.getDetails(), "Login", getView(), action);
 
+                        else
+                            MD.alert(context, data.getMsg(), data.getDetails());
+                    }
                     else
-                        MD.alert(context, data.getMsg(), data.getDetails());
+                        MD.alert(context, "Error", "Not Registered");
 
 
                 }
