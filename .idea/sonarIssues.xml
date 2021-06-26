@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="$APPLICATION_CONFIG_DIR$/scratches/scratch.groovy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../AppEcom_All/AppEcom/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../AppEcom_All/AppEcom/app/build/generated/source/kapt/debug/technited/minds/appecom/AppEcom_GeneratedInjector.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../AppEcom_All/AppEcom/app/src/main/java/technited/minds/appecom/API.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../AppEcom_All/AppEcom/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/FastIndiaRider/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/FastIndiaRider/app/src/main/java/sdr/tecqza/homedelivery_deliveryboy/API.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/FastIndiaRider/app/src/main/java/sdr/tecqza/homedelivery_deliveryboy/App.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/FastIndiaRider/app/src/main/java/sdr/tecqza/homedelivery_deliveryboy/HomeApi.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/FastIndiaRider/app/src/main/java/sdr/tecqza/homedelivery_deliveryboy/HomeApi.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/FastIndiaRider/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/Hasdeo/app/src/main/java/minds/technited/hasdeo/RegisterActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/InternshalaFood/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/InternshalaFood/app/src/main/java/com/adarshsahu/internshalafood/fragment/FavouritesFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../Backup/InternshalaFood/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/AddExtraItemsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/CartExtraItemsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/CartItemsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/CartItemsModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/CheckOutFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/CityModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/FavouriteFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/FeedbackFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/HomeActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/NotificationsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/NotificationsModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderDetailsExtraItemsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderDetailsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderDetailsItemsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderHistoryFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderItemsModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderTypeFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderedItemModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/OrderedItemsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/PopularFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/ProductModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/ProfileFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/SettingsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/StateModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/SupportFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/UrlFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VarietiesModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VarietyBottom.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VendorAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VendorModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VendorProductsAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VendorProductsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/VendorsFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/java/com/tecqza/gdm/fastindia/WebPage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../fastindia/FastIndia/app/src/main/res/values/styles.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/android-utils/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/technited/minds/bigbannerindia/API.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/technited/minds/bigbannerindia/RegisterFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
